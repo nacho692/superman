@@ -1,10 +1,13 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule }             from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { FiltersComponent }     from './components/filters/filters.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', component: FiltersComponent }
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [ RouterModule ],
+  imports: [ RouterModule.forRoot(routes) ]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

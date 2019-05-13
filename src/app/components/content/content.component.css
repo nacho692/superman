@@ -1,0 +1,41 @@
+#container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+  }
+  
+  #sidebar {
+    background-color: rebeccapurple;
+    min-width: 300px;
+    width: 20%;
+  }
+  
+  #content {
+    background-color: yellowgreen;
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+  
+  #top-bar {
+    padding: 2.5em 3.5em;
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+  }
+  
+  #map {
+    height: 100%;
+    width: 100%;
+  }
+
+  #card {
+    padding-left: 3.5em;
+    padding-right: 3.5em;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
+  }

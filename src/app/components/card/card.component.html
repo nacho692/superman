@@ -1,0 +1,25 @@
+<div id="point-view" class="form" *ngIf="point">
+  <div (click)="cancel()">
+    X
+  </div>
+  <div>
+    {{ point.name }}
+  </div>
+  <ul>
+      <li *ngFor="let category of point.categories">
+        {{ category.name }}
+      </li>
+  </ul>
+  <div>
+    {{ point.description }}
+  </div>
+</div>
+
+<div id="point-create" class="form" *ngIf="formNewPoint">
+    <div (click)="cancel()">
+        X
+    </div>
+    <app-dynamic-form (formSubmit)="onSubmit($event)" [questions]="newPointQuestions"></app-dynamic-form>
+</div>
+  
+

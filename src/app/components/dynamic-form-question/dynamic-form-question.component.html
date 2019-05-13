@@ -1,0 +1,17 @@
+<div [formGroup]="form">
+    <label [attr.for]="question.key">{{question.label}}</label>
+  
+    <div [ngSwitch]="question.controlType">
+  
+      <input *ngSwitchCase="'textbox'" [formControlName]="question.key"
+              [id]="question.name" [type]="question.type">
+  
+      <div *ngSwitchCase="'multicheck'">
+        <div *ngFor="let opt of question.options; let i=index" [formGroupName]="question.key">
+          <input type="checkbox" [formControlName]="opt.key"/> {{opt.name}}
+        </div>
+      </div>
+    </div> 
+  
+    <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div>
+  </div>
