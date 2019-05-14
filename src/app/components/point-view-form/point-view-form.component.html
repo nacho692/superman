@@ -1,0 +1,13 @@
+<div *ngIf="shouldShow">
+    <div>
+        {{ point.name }}
+    </div>
+    <ul>
+        <li *ngFor="let category of point.categories">
+            {{ category.name }}
+        </li>
+    </ul>
+    <div>
+        {{ point.description }}
+    </div>
+</div>

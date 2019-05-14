@@ -9,9 +9,11 @@ import { AgmCoreModule }        from '@agm/core';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { ContentComponent } from './components/content/content.component';
 import { ResultsComponent } from './components/results/results.component';
-import { CardComponent } from './components/card/card.component';
+import { FormPanelComponent } from './components/form-panel/form-panel.component';
 import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 import { DynamicFormQuestionComponent } from './components/dynamic-form-question/dynamic-form-question.component';
+import { PointCreateFormComponent } from './components/point-create-form/point-create-form.component';
+import { PointViewFormComponent } from './components/point-view-form/point-view-form.component';
 
 @NgModule({
   declarations: [
@@ -21,9 +23,11 @@ import { DynamicFormQuestionComponent } from './components/dynamic-form-question
     TopBarComponent,
     ContentComponent,
     ResultsComponent,
-    CardComponent,
+    FormPanelComponent,
     DynamicFormComponent,
-    DynamicFormQuestionComponent
+    DynamicFormQuestionComponent,
+    PointCreateFormComponent,
+    PointViewFormComponent
   ],
   imports: [
     BrowserModule,

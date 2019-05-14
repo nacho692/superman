@@ -3,6 +3,7 @@ import { Category } from '../domain/category';
 import { PointOfInterest } from '../domain/point-of-interest';
 import { POIS } from '../mocks/points-of-interest';
 import { Observable, of } from 'rxjs';
+import { CATEGORIES } from '../mocks/categories';
 
 @Injectable({
   providedIn: 'root',
@@ -29,14 +30,14 @@ export class PointsOfInterestService {
     }));
   }
 
-  save(lat: number, lng: number, name: string, description: string, categories: Category[]) {
+  save(lat: number, lng: number, name: string, description: string, categories: number[]) {
     POIS.push({
       id: POIS.length,
       name: name,
       description: description,
       latitude: lat,
       longitude: lng,
-      categories: categories,
+      categories: categories.map(cat_id => CATEGORIES.find(c => c.id == cat_id)),
     })
   }
 }

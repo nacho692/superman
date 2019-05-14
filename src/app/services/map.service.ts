@@ -23,11 +23,9 @@ export class MapService {
 
   announceCardCanceled() {
     this.cardCanceled.next();
-    this.pointSelected.next(null);
   }
 
   announceNewPoint(lat: number, lng: number) {
-    this.announceCardCanceled();
     this.newPoint.next([lat, lng]);
   }
 }
