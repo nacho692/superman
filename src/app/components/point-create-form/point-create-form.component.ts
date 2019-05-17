@@ -29,8 +29,10 @@ export class PointCreateFormComponent implements OnInit {
       this.searchService.newPointsAnnounced.subscribe(coords => {
         this.shouldShow = false;
       });
-
       this.mapService.cardCanceledAnnounced.subscribe( _ => {
+        this.shouldShow = false;
+      });
+      this.mapService.pointSelectedAnnounced.subscribe( _ => {
         this.shouldShow = false;
       });
     }

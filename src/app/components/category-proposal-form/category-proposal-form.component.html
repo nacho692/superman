@@ -1,0 +1,3 @@
+<div *ngIf="shouldShow">
+    <app-dynamic-form (formSubmit)="onSubmit($event)" [questions]="newCategoryProposalQuestions"></app-dynamic-form>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'app-category-proposal',
@@ -7,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryProposalComponent implements OnInit {
 
-  constructor() { }
+  constructor(private categoryService: CategoryService) {}
 
   onClick() {
-    
+    this.categoryService.announceNewCategoryProposal();
   }
 
   ngOnInit() {

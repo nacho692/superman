@@ -15,6 +15,7 @@ import { DynamicFormQuestionComponent } from './components/dynamic-form-question
 import { PointCreateFormComponent } from './components/point-create-form/point-create-form.component';
 import { PointViewFormComponent } from './components/point-view-form/point-view-form.component';
 import { CategoryProposalComponent } from './components/category-proposal/category-proposal.component';
+import { CategoryProposalFormComponent } from './components/category-proposal-form/category-proposal-form.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CategoryProposalComponent } from './components/category-proposal/catego
     DynamicFormQuestionComponent,
     PointCreateFormComponent,
     PointViewFormComponent,
-    CategoryProposalComponent
+    CategoryProposalComponent,
+    CategoryProposalFormComponent
   ],
   imports: [
     BrowserModule,

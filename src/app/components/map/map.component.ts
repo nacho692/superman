@@ -13,7 +13,7 @@ export class MapComponent {
   lat: number = 51.678418;
   lng: number = 7.809007;
 
-  newPoint: [number, number]
+  newPoint: [number, number];
 
   points: PointOfInterest[];
 
@@ -26,6 +26,7 @@ export class MapComponent {
         this.lng = pois[0].longitude;
       };
     });
+    
     mapService.cardCanceledAnnounced.subscribe(_ => {
       this.newPoint = null;
     });
