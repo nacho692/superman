@@ -35,6 +35,9 @@ export class PointCreateFormComponent implements OnInit {
       this.mapService.pointSelectedAnnounced.subscribe( _ => {
         this.shouldShow = false;
       });
+      this.categoryService.newCategoryProposalAnnounced.subscribe( _ => {
+        this.shouldShow = false;
+      });
     }
 
   ngOnInit() {

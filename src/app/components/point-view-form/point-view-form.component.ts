@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MapService } from 'src/app/services/map.service';
 import { PointOfInterest } from 'src/app/domain/point-of-interest';
+import { Category } from 'src/app/domain/category';
+import { CategoryService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'app-point-view-form',
@@ -12,7 +14,8 @@ export class PointViewFormComponent implements OnInit {
   shouldShow: boolean = false;
   point: PointOfInterest;
 
-  constructor(private mapService: MapService) { 
+  constructor(private mapService: MapService,
+              private categoryService: CategoryService) { 
       this.mapService.pointSelectedAnnounced.subscribe(point => {
         this.shouldShow = true;
         this.point = point;
@@ -22,7 +25,10 @@ export class PointViewFormComponent implements OnInit {
       });
       this.mapService.cardCanceledAnnounced.subscribe(_ => {
         this.shouldShow = false;
-      })
+      });
+      this.categoryService.newCategoryProposalAnnounced.subscribe( _ => {
+        this.shouldShow = false;
+      });
   }
   
   ngOnInit() {
