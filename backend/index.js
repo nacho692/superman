@@ -1,6 +1,11 @@
 var express = require('express');
+var bodyParser = require("body-parser");
 var cors = require('cors');
 var app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.use(cors());
 
 categories = [
@@ -92,7 +97,7 @@ app.post('/save_poi', function (req, res) {
 });
 
 app.post('/search_pois', function (req, res) {
-  console.log(req.body);
+  console.log(req);
   let query = req.body.query;
   let categories = req.body.categories;
   query = query.toLowerCase();
