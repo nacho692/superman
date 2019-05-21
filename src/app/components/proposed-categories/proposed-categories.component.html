@@ -1,8 +1,7 @@
-<ul class="categories">
-    <li *ngFor="let category of categories"
+<ul class="proposed_categories">
+    <li *ngFor="let category of proposed_categories"
       [class.selected]="selectedCategories.has(category)"
       (click)="onSelect(category)">
       <span class="badge">{{category.id}}</span> {{category.name}}
     </li>
   </ul>
-  
