@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-content',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentComponent implements OnInit {
   
-  constructor() {
+  constructor(private router: Router, 
+    private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    window.location.reload();
   }
 }

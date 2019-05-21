@@ -16,6 +16,8 @@ import { PointCreateFormComponent } from './components/point-create-form/point-c
 import { PointViewFormComponent } from './components/point-view-form/point-view-form.component';
 import { CategoryProposalComponent } from './components/category-proposal/category-proposal.component';
 import { CategoryProposalFormComponent } from './components/category-proposal-form/category-proposal-form.component';
+import { LoginComponent } from './components/login/login.component';
+import { HasRoleDirective } from './directives/has-role.directive';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { CategoryProposalFormComponent } from './components/category-proposal-fo
     PointCreateFormComponent,
     PointViewFormComponent,
     CategoryProposalComponent,
-    CategoryProposalFormComponent
+    CategoryProposalFormComponent,
+    LoginComponent,
+    HasRoleDirective
   ],
   imports: [
     BrowserModule,
