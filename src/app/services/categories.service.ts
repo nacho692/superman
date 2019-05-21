@@ -19,13 +19,11 @@ export class CategoryService {
   constructor(private http: HttpClient) {}
 
   getProposedCategories() : Observable<Category[]> {
-    return of([]);
-    //return this.http.get<Category[]>(backend_url + '/proposed_categories');
+    return this.http.get<Category[]>(backend_url + '/proposed_categories');
   }
 
   getCategories() : Observable<Category[]> {
-    return of([]);
-    //return this.http.get<Category[]>(backend_url + '/categories');;
+    return this.http.get<Category[]>(backend_url + '/categories');;
   }
 
   announceNewCategoryProposal() {
