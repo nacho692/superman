@@ -19,6 +19,9 @@ export class ResultsComponent implements OnInit {
     this.mapService.pointSelectedAnnounced.subscribe(point => {
       this.selectedPoint = point;
     });
+    this.mapService.cardCanceledAnnounced.subscribe(_ => {
+      this.selectedPoint = null;
+    });
   }
 
   ngOnInit() {
