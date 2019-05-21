@@ -110,7 +110,7 @@ app.post('/search_pois', function (req, res) {
     return new Array();
   }
   
-  found_pois = pois.filter(poi => {
+  found_pois = POIS.filter(poi => {
     let searchFound = true;
     if (query != "") {
       searchFound = poi.name.toLowerCase().search(query) >= 0;
