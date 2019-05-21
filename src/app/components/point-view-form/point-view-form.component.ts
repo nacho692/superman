@@ -23,9 +23,6 @@ export class PointViewFormComponent implements OnInit {
       this.mapService.newPointAnnounced.subscribe(_ => {
         this.shouldShow = false;
       });
-      this.mapService.cardCanceledAnnounced.subscribe(_ => {
-        this.shouldShow = false;
-      });
       this.categoryService.newCategoryProposalAnnounced.subscribe( _ => {
         this.shouldShow = false;
       });
@@ -34,4 +31,9 @@ export class PointViewFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  close() {
+    this.shouldShow = false;
+    this.point = null;
+    this.mapService.announceCardCanceled();
+  }
 }

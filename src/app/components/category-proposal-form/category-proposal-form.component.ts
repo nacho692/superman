@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PointsOfInterestService } from 'src/app/services/points-of-interest.service';
 import { CategoryService } from 'src/app/services/categories.service';
 import { SearchService } from 'src/app/services/search.service';
 import { MapService } from 'src/app/services/map.service';
 import { QuestionBase } from 'src/app/utils/question-base';
 import { TextboxQuestion } from 'src/app/utils/question-textbox';
-import { MulticheckQuestion } from 'src/app/utils/question-multicheck';
 
 @Component({
   selector: 'app-category-proposal-form',
@@ -27,9 +25,6 @@ export class CategoryProposalFormComponent implements OnInit {
         this.shouldShow = false;
       });
       this.searchService.newPointsAnnounced.subscribe(coords => {
-        this.shouldShow = false;
-      });
-      this.mapService.cardCanceledAnnounced.subscribe( _ => {
         this.shouldShow = false;
       });
       this.mapService.pointSelectedAnnounced.subscribe( _ => {
@@ -63,18 +58,10 @@ export class CategoryProposalFormComponent implements OnInit {
     ];
   }
 
-
-  // onSubmit(payload: any) {
-  //   let categories = []
-  //   Object.entries(payload.categories).forEach(
-  //     ([key, value]) => {
-  //       if (value) {
-  //         categories.push(Number(key));
-  //       }
-  //     }
-  //   );
-    
-  //   this.pointOfInteresetService.save(this.newPointCoords[0], this.newPointCoords[1], payload.name, payload.description, categories);
-  // }
-
+  close() {
+    this.shouldShow = false;
+    this.categoryDescription = "";
+    this.categoryDescription = "";
+    this.mapService.announceCardCanceled();
+  }
 }

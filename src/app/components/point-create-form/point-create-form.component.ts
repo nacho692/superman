@@ -29,9 +29,6 @@ export class PointCreateFormComponent implements OnInit {
       this.searchService.newPointsAnnounced.subscribe(coords => {
         this.shouldShow = false;
       });
-      this.mapService.cardCanceledAnnounced.subscribe( _ => {
-        this.shouldShow = false;
-      });
       this.mapService.pointSelectedAnnounced.subscribe( _ => {
         this.shouldShow = false;
       });
@@ -81,4 +78,9 @@ export class PointCreateFormComponent implements OnInit {
     this.pointOfInteresetService.save(this.newPointCoords[0], this.newPointCoords[1], payload.name, payload.description, categories);
   }
 
+  close() {
+    this.shouldShow = false;
+    this.newPointCoords = null;
+    this.mapService.announceCardCanceled();
+  }
 }

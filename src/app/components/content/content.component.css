@@ -1,41 +1,40 @@
-#container {
-    display: flex;
-    flex-direction: row;
+#wrapper {
     height: 100vh;
-  }
-  
-  #sidebar {
-    background-color: rebeccapurple;
-    min-width: 300px;
-    width: 20%;
-  }
-  
-  #content {
-    background-color: yellowgreen;
+}
+
+#row {
     height: 100%;
-    width: 100%;
-    position: relative;
-  }
-  
-  #top-bar {
+}
+
+#content {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+#sidebar {
+    padding-top: 1%;
+    text-align: center;
+}
+
+#top-bar {
     padding: 2.5em 3.5em;
     box-sizing: border-box;
     position: absolute;
     width: 100%;
     z-index: 1;
-  }
-  
-  #map {
+}
+
+#map {
     height: 100%;
     width: 100%;
-  }
+}
 
-  #form-panel {
-    padding-left: 3.5em;
-    padding-right: 3.5em;
+#form-panel {
+    padding-left: 25em;
+    padding-right: 25em;
     box-sizing: border-box;
     position: absolute;
     bottom: 0;
     width: 100%;
     z-index: 1;
-  }
+}

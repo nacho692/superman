@@ -1,5 +1,5 @@
-<ul>
-  <li *ngFor="let point of points">
-    {{point.name}}
-  </li>
+<ul class="list-group" id="results">
+    <li *ngFor="let point of points" [class.active]="selectedPoint === point" class="list-group-item result" (click)="resultSelected(point)">
+        <small>{{point.name}}</small>
+    </li>
 </ul>

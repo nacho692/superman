@@ -8,11 +8,7 @@ import { MapService } from 'src/app/services/map.service';
 })
 export class FormPanelComponent implements OnInit {
 
-  constructor(private mapService: MapService) { }
-
-  cancel() {
-    this.mapService.announceCardCanceled();
-  }
+  constructor() { }
 
   ngOnInit() {
   }

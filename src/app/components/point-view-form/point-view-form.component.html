@@ -1,13 +1,26 @@
 <div *ngIf="shouldShow">
-    <div>
-        {{ point.name }}
+    <div class="card-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-11">
+                    {{ point.name }}
+                </div>
+                <div class="col-1">
+                    <button type="button" class="close" aria-label="Close" (click)="close()">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                </div>
+            </div>
+        </div>
     </div>
-    <ul>
-        <li *ngFor="let category of point.categories">
-            {{ category.name }}
-        </li>
-    </ul>
-    <div>
-        {{ point.description }}
+    <div class="card-body">
+        <ul>
+            <li *ngFor="let category of point.categories">
+                {{ category.name }}
+            </li>
+        </ul>
+        <div>
+            {{ point.description }}
+        </div>
     </div>
 </div>

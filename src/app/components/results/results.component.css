@@ -1,0 +1,10 @@
+#results {
+    text-align: left;
+}
+
+.result {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+}

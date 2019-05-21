@@ -18,6 +18,7 @@ import { CategoryProposalComponent } from './components/category-proposal/catego
 import { CategoryProposalFormComponent } from './components/category-proposal-form/category-proposal-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { HasRoleDirective } from './directives/has-role.directive';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { HasRoleDirective } from './directives/has-role.directive';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDP827zHnIce50b1GTB8QPrHOUBFwcsGyw'
     })
