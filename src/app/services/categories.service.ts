@@ -33,8 +33,20 @@ export class CategoryService {
       name: name
     });
   }
+  
+//  save(id) {
+//    let nextId : number = this.proposedCategories.length + 1;
+//    PROPOSED_CATEGORIES.push({
+//      id: nextId,
+//      description: description,
+//      name: name
+//    });
+//  }
+//
+//  delete(id) {}
 
   announceNewCategoryProposal() {
     this.newCategoryProposal.next();
   }
+
 }

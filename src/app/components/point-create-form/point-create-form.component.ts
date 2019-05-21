@@ -79,6 +79,7 @@ export class PointCreateFormComponent implements OnInit {
     );
     
     this.pointOfInteresetService.save(this.newPointCoords[0], this.newPointCoords[1], payload.name, payload.description, categories);
+    this.shouldShow = false;
   }
 
 }
