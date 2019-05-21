@@ -5,6 +5,9 @@
       <app-category-proposal></app-category-proposal>
   </div>
   <div id="content">
+    <div *hasRole="'admin'" id="logout-button" (click)="logout()">
+      <p> Logout</p>
+    </div>
     <div id="top-bar">
       <app-top-bar></app-top-bar>
     </div>
