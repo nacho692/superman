@@ -107,11 +107,11 @@ app.post('/search_pois', function (req, res) {
   }
   
   found_pois = pois.filter(poi => {
-    let searchFound = true
+    let searchFound = true;
     if (query != "") {
       searchFound = poi.name.toLowerCase().search(query) >= 0;
     }
-    let categoryFound = true
+    let categoryFound = true;
     if (categories.length > 0) {
       categoryFound = poi.categories.some(poi_category => categories.includes(poi_category.id));
     }
