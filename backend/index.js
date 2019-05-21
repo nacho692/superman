@@ -15,7 +15,7 @@ pois = [
     { id: 3, name: "On Tap", description: "Me gustan los condimentos", latitude: -34.583137, longitude: -58.433931, categories: [categories[0]] },
     { id: 4, name: "Museo de ciencias naturales", description: "Buenos dinosaurios", latitude: -34.605045, longitude: -58.437525, categories: [categories[4]] },
     { id: 5, name: "Sala de reuniones", description: "Buenas cervezas", latitude: -34.590815, longitude: -58.427522, categories: [categories[4]]}
-]
+];
 
 proposed_categories = [ ];
 
@@ -104,9 +104,9 @@ app.post('/search_pois', function (req, res) {
     return searchFound && categoryFound;
   });
   res.json(found_pois);
-}
-
+});
 
 
 app.listen(3000, function () {
+  console.log("Listening on 3000!");
 });
