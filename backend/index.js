@@ -16,7 +16,7 @@ CATEGORIES = [
   { name: "Museo", id: 5, description: "Huesos de dinosaurios"}
 ];
 
-pois = [
+POIS = [
     { id: 1, name: "La Birreria", description: "Tienen un arcade con windjammers +10", latitude: -34.556578, longitude: -58.452443, categories: [CATEGORIES[0], CATEGORIES[1]] },
     { id: 2, name: "El gato y la caja negra y la luna y los gatos", description: "Buenos chorizos", latitude: -34.561637, longitude: -58.463049, categories: [CATEGORIES[0]] },
     { id: 3, name: "On Tap", description: "Me gustan los condimentos", latitude: -34.583137, longitude: -58.433931, categories: [CATEGORIES[0]] },
@@ -86,8 +86,8 @@ app.post('/accept_category', function (req, res) {
 app.post('/save_poi', function (req, res) {
   console.log(req.body);
   let poi = req.body;
-  pois.push({
-    id: pois.length,
+  POIS.push({
+    id: POIS.length,
     name: poi.name,
     description: poi.description,
     latitude: poi.lat,
@@ -106,7 +106,7 @@ app.post('/search_pois', function (req, res) {
     return new Array();
   }
   
-  found_pois = pois.filter(poi => {
+  found_pois = POIS.filter(poi => {
     let searchFound = true;
     if (query != "") {
       searchFound = poi.name.toLowerCase().search(query) >= 0;
