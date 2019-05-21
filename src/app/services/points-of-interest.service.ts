@@ -20,6 +20,8 @@ export class PointsOfInterestService {
 
   save(lat: number, lng: number, name: string, description: string, categories: number[]) {
     let poi = {name: name, description: description, lat: lat, lng: lng, categories: categories};
+    console.log(backend_url + '/save_poi');
+    console.log(JSON.stringify(poi))
     this.http.post<any>(backend_url + '/save_poi', poi);   
   }
 }

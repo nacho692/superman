@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-CATEGORIES = [
+const CATEGORIES = [
   { name: "Bar", id: 1, description: "Papitas y alcohol"},
   { name: "Teatro", id: 2, description: "Papitas y gente que actúa"},
   { name: "Espacio cultural", id: 3, description: "Hippies"},
@@ -80,6 +80,8 @@ app.post('/accept_category', function (req, res) {
     name: accepted_category.name,
     description: accepted_category.description,
   });
+
+  res.sendStatus(200)
 });
 
 
@@ -92,8 +94,10 @@ app.post('/save_poi', function (req, res) {
     description: poi.description,
     latitude: poi.lat,
     longitude: poi.lng,
-    categories: poi.categories.map(cat_id => CATEGORIES.find(c => c.id == cat_id)),
-  })
+    categories: [poi.categories.map(cat_id => CATEGORIES.find(c => c.id === cat_id))],
+  });
+  console.log(JSON.stringify(POIS))
+  res.sendStatus(200);
 });
 
 app.post('/search_pois', function (req, res) {
