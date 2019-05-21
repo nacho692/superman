@@ -22,17 +22,17 @@ pois = [
 proposed_categories = [ ];
 
 app.get('/categories', function (req, res) {
-  console.log("/categories")
+  console.log("/categories");
   res.json(categories);
 });
 
 app.get('/proposed_categories', function (req, res) {
-  console.log("/proposed_categories")
+  console.log("/proposed_categories");
   res.json(proposed_categories);
 });
 
 app.post('/propose_category', function (req, res) {
-  console.log(req.body)
+  console.log(req.body);
   let proposed_category = req.body;
 
   proposed_categories = proposed_categories.filter(
@@ -50,7 +50,7 @@ app.post('/propose_category', function (req, res) {
 
 
 app.post('/reject_category', function (req, res) {
-  console.log(req.body)
+  console.log(req.body);
   let rejected_category = req.body;
 
   proposed_categories = proposed_categories.filter(
@@ -61,7 +61,7 @@ app.post('/reject_category', function (req, res) {
 });
 
 app.post('/accept_category', function (req, res) {
-  console.log(req.body)
+  console.log(req.body);
   let accepted_category = req.body;
 
   proposed_categories = proposed_categories.filter(
@@ -79,7 +79,7 @@ app.post('/accept_category', function (req, res) {
 
 
 app.post('/save_poi', function (req, res) {
-  console.log(req.body)
+  console.log(req.body);
   let poi = req.body;
   POIS.push({
     id: pois.length,
@@ -92,7 +92,7 @@ app.post('/save_poi', function (req, res) {
 });
 
 app.post('/search_pois', function (req, res) {
-  console.log(req.body)
+  console.log(req.body);
   let query = req.body.query;
   let categories = req.body.categories;
   query = query.toLowerCase();
