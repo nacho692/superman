@@ -19,7 +19,7 @@ export class PointsOfInterestService {
   }
 
   save(lat: number, lng: number, name: string, description: string, categories: number[]) {
-    let proposed_category = {name: name, description: description, lat: lat, lng: lng, categories: categories};
-    this.http.post<any>(backend_url + '/save_poi', proposed_category);   
+    let poi = {name: name, description: description, lat: lat, lng: lng, categories: categories};
+    this.http.post<any>(backend_url + '/save_poi', poi);   
   }
 }

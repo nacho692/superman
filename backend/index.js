@@ -86,7 +86,7 @@ app.post('/accept_category', function (req, res) {
 app.post('/save_poi', function (req, res) {
   console.log(req.body);
   let poi = req.body;
-  POIS.push({
+  pois.push({
     id: pois.length,
     name: poi.name,
     description: poi.description,
