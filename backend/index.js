@@ -94,8 +94,9 @@ app.post('/save_poi', function (req, res) {
     description: poi.description,
     latitude: poi.lat,
     longitude: poi.lng,
-    categories: [poi.categories.map(cat_id => CATEGORIES.find(c => c.id == cat_id))],
+    categories: [poi.categories.map(cat_id => CATEGORIES.find(c => c.id === cat_id))],
   });
+  console.log(JSON.stringify(POIS))
   res.sendStatus(200);
 });
 
