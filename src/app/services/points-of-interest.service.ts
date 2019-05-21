@@ -14,7 +14,7 @@ export class PointsOfInterestService {
 
   constructor(private http: HttpClient) {}
 
-  search(query: string, categories: Category[]): Observable<PointOfInterest[]> {
+  search(query: string, categories: number[]): Observable<PointOfInterest[]> {
     return this.http.post<PointOfInterest[]>(backend_url + '/search_pois', {query: query, categories: categories});
   }
 

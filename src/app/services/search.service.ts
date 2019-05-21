@@ -12,7 +12,7 @@ export class SearchService {
   private newPointsOfInterests = new Subject<Array<PointOfInterest>>();
 
   private searchQuery = "";
-  private selectedCategories = new Set();
+  private selectedCategories = new Set<Category>();
   
   newPointsAnnounced = this.newPointsOfInterests.asObservable();
 
@@ -29,7 +29,9 @@ export class SearchService {
   }
 
   private emitSearch() {
-    this.pointsOfInterestService.search(this.searchQuery, Array.from(this.selectedCategories))
-    .subscribe(pois => this.newPointsOfInterests.next(pois));
+    this.pointsOfInterestService.search(this.searchQuery, Array.from<Category>(this.selectedCategories).map(c => c.id))
+    .subscribe(pois => {
+      this.newPointsOfInterests.next(pois);
+    });
   }
 }

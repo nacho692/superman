@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ContentComponent implements OnInit {
   
-  constructor(private router: Router, 
-    private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {

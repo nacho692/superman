@@ -97,7 +97,7 @@ app.post('/save_poi', function (req, res) {
 });
 
 app.post('/search_pois', function (req, res) {
-  console.log(req);
+  console.log(req.body);
   let query = req.body.query;
   let categories = req.body.categories;
   query = query.toLowerCase();
@@ -113,7 +113,7 @@ app.post('/search_pois', function (req, res) {
     }
     let categoryFound = true
     if (categories.length > 0) {
-      categoryFound = poi.categories.some(c => categories.includes(c));
+      categoryFound = poi.categories.some(poi_category => categories.includes(poi_category.id));
     }
     return searchFound && categoryFound;
   });
