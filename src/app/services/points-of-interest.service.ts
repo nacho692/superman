@@ -1,43 +1,26 @@
 import { Injectable, ɵEMPTY_ARRAY } from '@angular/core';
 import { Category } from '../domain/category';
 import { PointOfInterest } from '../domain/point-of-interest';
-import { POIS } from '../mocks/points-of-interest';
 import { Observable, of } from 'rxjs';
-import { CATEGORIES } from '../mocks/categories';
+import { backend_url } from '../config/backend_url'
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class PointsOfInterestService {
+
+  constructor(private http: HttpClient) {}
+
   search(query: string, categories: Category[]): Observable<PointOfInterest[]> {
-    query = query.toLowerCase();
-    if (query == "" && categories.length == 0) {
-      return of(new Array());
-    }
-    
-    return of(POIS.filter(poi => {
-      let searchFound: boolean = true
-      if (query != "") {
-        searchFound = poi.name.toLowerCase().search(query) >= 0;
-      }
-
-      let categoryFound: boolean = true
-      if (categories.length > 0) {
-        categoryFound = poi.categories.some(c => categories.includes(c));
-      }
-
-      return searchFound && categoryFound;
-    }));
+    return of([]);
+    return this.http.post<PointOfInterest[]>(backend_url + '/search_pois', {query: query, categories: categories});
   }
 
   save(lat: number, lng: number, name: string, description: string, categories: number[]) {
-    POIS.push({
-      id: POIS.length,
-      name: name,
-      description: description,
-      latitude: lat,
-      longitude: lng,
-      categories: categories.map(cat_id => CATEGORIES.find(c => c.id == cat_id)),
-    })
+    let proposed_category = {name: name, description: description, lat: lat, lng: lng, categories: categories};
+    this.http.post<any>(backend_url + '/save_poi', proposed_category);   
   }
 }

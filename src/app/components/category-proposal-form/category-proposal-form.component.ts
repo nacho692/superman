@@ -37,7 +37,7 @@ export class CategoryProposalFormComponent implements OnInit {
     }
 
   ngOnInit() {
-  }
+  }  
 
   proposeCategory() {
     this.newCategoryProposalQuestions = [
@@ -64,4 +64,10 @@ export class CategoryProposalFormComponent implements OnInit {
     this.categoryDescription = "";
     this.mapService.announceCardCanceled();
   }
+  
+  onSubmit(name: string, description: string) {
+    this.categoryService.announceProposedCategory(name,description);
+    this.shouldShow = false;
+ }
+
 }

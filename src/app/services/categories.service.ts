@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Category } from '../domain/category';
-import { CATEGORIES } from '../mocks/categories';
-import { PROPOSED_CATEGORIES } from '../mocks/proposed-categories'
-import { Observable, of, Subject } from 'rxjs';
-import { ProposedCategory } from '../domain/proposed-category';
+import { Observable, Subject, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { backend_url } from '../config/backend_url'
 
 
 @Injectable({
@@ -12,29 +11,38 @@ import { ProposedCategory } from '../domain/proposed-category';
 export class CategoryService {
 
   private newCategoryProposal = new Subject();
+  private modifiedCategoryProposals = new Subject();
 
   newCategoryProposalAnnounced = this.newCategoryProposal.asObservable();
+  modifiedCategoryProposalsAnnounced = this.modifiedCategoryProposals.asObservable();
   
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  proposedCategories() : Observable<ProposedCategory[]> {
-    return of(PROPOSED_CATEGORIES);
+  getProposedCategories() : Observable<Category[]> {
+    return of([]);
+    //return this.http.get<Category[]>(backend_url + '/proposed_categories');
   }
 
   getCategories() : Observable<Category[]> {
-    return of(CATEGORIES);
-  }
-
-  proposeCategory(name: string, description: string) {
-    let nextId : number = this.proposedCategories.length + 1;
-    PROPOSED_CATEGORIES.push({
-      id: nextId,
-      description: description,
-      name: name
-    });
+    return of([]);
+    //return this.http.get<Category[]>(backend_url + '/categories');;
   }
 
   announceNewCategoryProposal() {
     this.newCategoryProposal.next();
+  }
+
+  announceProposedCategory(name: string, description: string) {
+    this.http.post<Category>(backend_url + '/', {name: name, description: description})
+  }
+
+  announceAcceptedCategory(category: Category) {
+    this.http.post<any>(backend_url + '/accept_category', category);
+    this.modifiedCategoryProposals.next();
+  }
+
+  announceRejectedCategory(category: Category) {
+    this.http.post<any>(backend_url + '/reject_category', category);
+    this.modifiedCategoryProposals.next();
   }
 }

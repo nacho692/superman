@@ -19,6 +19,7 @@ import { CategoryProposalFormComponent } from './components/category-proposal-fo
 import { LoginComponent } from './components/login/login.component';
 import { HasRoleDirective } from './directives/has-role.directive';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDP827zHnIce50b1GTB8QPrHOUBFwcsGyw'
     })
