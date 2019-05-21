@@ -9,7 +9,13 @@ import { QuestionControlService } from 'src/app/services/question-control-servic
 })
 export class DynamicFormComponent implements OnInit {
  
-  @Input() questions: QuestionBase<any, any>[] = [];
+  _questions: QuestionBase<any, any>[];
+  @Input()
+  set questions(questions: QuestionBase<any, any>[]) {
+    this._questions = questions;
+    this.form = this.qcs.toFormGroup(this._questions);
+  }
+
   @Output() formSubmit = new EventEmitter<JSON>();
   
   form: FormGroup;
@@ -18,7 +24,6 @@ export class DynamicFormComponent implements OnInit {
   constructor(private qcs: QuestionControlService) {  }
  
   ngOnInit() {
-    this.form = this.qcs.toFormGroup(this.questions);
   }
  
   onSubmit() {

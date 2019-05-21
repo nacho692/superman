@@ -16,7 +16,7 @@ export class PointCreateFormComponent implements OnInit {
 
   shouldShow: boolean = false;
   newPointCoords: [number, number];
-  newPointQuestions: QuestionBase<any, any>[];
+  newPointQuestions: QuestionBase<any, any>[] = [];
 
   constructor(private mapService: MapService, 
     private searchService: SearchService,
