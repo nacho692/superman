@@ -24,7 +24,7 @@ POIS = [
     { id: 5, name: "Sala de reuniones", description: "Buenas cervezas", latitude: -34.590815, longitude: -58.427522, categories: [CATEGORIES[4]]}
 ];
 
-proposed_categories = [ ];
+PROPOSED_CATEGORIES = [ ];
 
 app.get('/categories', function (req, res) {
   console.log("/categories");
@@ -33,21 +33,21 @@ app.get('/categories', function (req, res) {
 
 app.get('/proposed_categories', function (req, res) {
   console.log("/proposed_categories");
-  res.json(proposed_categories);
+  res.json(PROPOSED_CATEGORIES);
 });
 
 app.post('/propose_category', function (req, res) {
   console.log(req.body);
   let proposed_category = req.body;
 
-  proposed_categories = proposed_categories.filter(
+  PROPOSED_CATEGORIES = PROPOSED_CATEGORIES.filter(
     function(category, index, arr) {
       return category.id != accepted_category.id;
     }
   );
 
-  proposed_categories.push({
-    id: proposed_categories.length,
+  PROPOSED_CATEGORIES.push({
+    id: PROPOSED_CATEGORIES.length,
     name: proposed_category.name,
     description: proposed_category.description,
   });
@@ -58,7 +58,7 @@ app.post('/reject_category', function (req, res) {
   console.log(req.body);
   let rejected_category = req.body;
 
-  proposed_categories = proposed_categories.filter(
+  PROPOSED_CATEGORIES = PROPOSED_CATEGORIES.filter(
     function(category, index, arr) {
       return category.id != rejected_category.id;
     }
@@ -69,7 +69,7 @@ app.post('/accept_category', function (req, res) {
   console.log(req.body);
   let accepted_category = req.body;
 
-  proposed_categories = proposed_categories.filter(
+  PROPOSED_CATEGORIES = PROPOSED_CATEGORIES.filter(
     function(category, index, arr) {
       return category.id != accepted_category.id;
     }
