@@ -96,7 +96,7 @@ app.post('/save_poi', function (req, res) {
     longitude: poi.lng,
     categories: [poi.categories.map(cat_id => CATEGORIES.find(c => c.id == cat_id))],
   });
-  res.sendStatus(200)
+  res.sendStatus(200);
 });
 
 app.post('/search_pois', function (req, res) {
@@ -109,12 +109,12 @@ app.post('/search_pois', function (req, res) {
     return new Array();
   }
   
-  found_pois = POIS.filter(poi => {
-    let searchFound = true
+  found_pois = pois.filter(poi => {
+    let searchFound = true;
     if (query != "") {
       searchFound = poi.name.toLowerCase().search(query) >= 0;
     }
-    let categoryFound = true
+    let categoryFound = true;
     if (categories.length > 0) {
       categoryFound = poi.categories.some(poi_category => categories.includes(poi_category.id));
     }
