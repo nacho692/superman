@@ -64,7 +64,7 @@ export class CategoryProposalFormComponent implements OnInit {
   }
 
   onSubmit(name: string, description: string) {
-    this.categoryService.save(name,description);
+    this.categoryService.proposeCategory(name,description);
     this.shouldShow = false;
  }
 
