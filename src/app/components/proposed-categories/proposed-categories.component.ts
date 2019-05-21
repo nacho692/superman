@@ -6,7 +6,7 @@ import { MapService } from 'src/app/services/map.service';
 import { QuestionBase } from 'src/app/utils/question-base';
 import { TextboxQuestion } from 'src/app/utils/question-textbox';
 import { MulticheckQuestion } from 'src/app/utils/question-multicheck';
-import { ProposedCategory } from 'src/app/domain/proposed-category';
+import { Category } from 'src/app/domain/category';
 
 
 @Component({
@@ -16,7 +16,7 @@ import { ProposedCategory } from 'src/app/domain/proposed-category';
 })
 export class ProposedCategoriesComponent implements OnInit {
   
-  proposed_categories : ProposedCategory[];
+  proposed_categories : Category[];
 
   constructor(private categoryService: CategoryService) { 
   }
@@ -25,11 +25,11 @@ export class ProposedCategoriesComponent implements OnInit {
     this.getCategories();
   }
 
-  onAccept(category: ProposedCategory) {
+  onAccept(category: Category) {
     this.categoryService.announceAcceptedCategory(category);
   }
   
-  onReject(category: ProposedCategory) {
+  onReject(category: Category) {
     this.categoryService.announceRejectedCategory(category);
   }
 
