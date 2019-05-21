@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Category } from '../domain/category';
-import { CATEGORIES } from '../mocks/categories';
-import { PROPOSED_CATEGORIES } from '../mocks/proposed-categories'
-import { Observable, of, Subject } from 'rxjs';
-import { ProposedCategory } from '../domain/proposed-category';
+import { Observable, Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { backend_url } from '../config/backend_url'
 
 
 @Injectable({
@@ -17,36 +16,46 @@ export class CategoryService {
   newCategoryProposalAnnounced = this.newCategoryProposal.asObservable();
   modifiedCategoryProposalsAnnounced = this.modifiedCategoryProposals.asObservable();
   
-  constructor() {}
+  constructor(private http: HttpClient) {
+  }
 
-  proposedCategories() : Observable<ProposedCategory[]> {
-    return of(PROPOSED_CATEGORIES);
+  getProposedCategories() : Observable<Category[]> {
+    return this.http.get<Category[]>(backend_url + '/proposed_categories');
   }
 
   getCategories() : Observable<Category[]> {
-    return of(CATEGORIES);
+    return this.http.get<Category[]>(backend_url + '/categories');;
   }
 
   announceNewCategoryProposal() {
     this.newCategoryProposal.next();
   }
 
-  
+  announceProposedCategory(name: string, description: string) {
+    let proposed_category: Category = { id: 0, name: name, description: description };
+    return this.http.post<Category>(backend_url + '/', proposed_category)
+    //let nextId = PROPOSED_CATEGORIES.length;
+    //CATEGORIES.push({
+    //  name: name,
+    //  description: description,
+    //  id: nextId
+    //})
+  }
 
-  announceAcceptedCategory(category: ProposedCategory) {
-    let nextId = CATEGORIES.length;
-    CATEGORIES.push({
-      name: category.name,
-      description: category.description,
-      id: nextId
-    })
+  announceAcceptedCategory(category: Category) {
+    //let nextId = CATEGORIES.length;
+    //CATEGORIES.push({
+    //  name: category.name,
+    //  description: category.description,
+    //  id: nextId
+    //})
     this.modifiedCategoryProposals.next();
   }
 
-  announceRejectedCategory(rejected_category: ProposedCategory) {
-    PROPOSED_CATEGORIES = PROPOSED_CATEGORIES.filter(category => {
-      return category != rejected_category;
-    });
+  announceRejectedCategory(rejected_category: Category) {
+    //PROPOSED_CATEGORIES = PROPOSED_CATEGORIES.filter(category => {
+    //  return category != rejected_category;
+    //});
     this.modifiedCategoryProposals.next();
   }
 }
