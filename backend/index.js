@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-categories = [
+CATEGORIES = [
   { name: "Bar", id: 1, description: "Papitas y alcohol"},
   { name: "Teatro", id: 2, description: "Papitas y gente que actúa"},
   { name: "Espacio cultural", id: 3, description: "Hippies"},
@@ -17,18 +17,18 @@ categories = [
 ];
 
 pois = [
-    { id: 1, name: "La Birreria", description: "Tienen un arcade con windjammers +10", latitude: -34.556578, longitude: -58.452443, categories: [categories[0], categories[1]] },
-    { id: 2, name: "El gato y la caja negra y la luna y los gatos", description: "Buenos chorizos", latitude: -34.561637, longitude: -58.463049, categories: [categories[0]] },
-    { id: 3, name: "On Tap", description: "Me gustan los condimentos", latitude: -34.583137, longitude: -58.433931, categories: [categories[0]] },
-    { id: 4, name: "Museo de ciencias naturales", description: "Buenos dinosaurios", latitude: -34.605045, longitude: -58.437525, categories: [categories[4]] },
-    { id: 5, name: "Sala de reuniones", description: "Buenas cervezas", latitude: -34.590815, longitude: -58.427522, categories: [categories[4]]}
+    { id: 1, name: "La Birreria", description: "Tienen un arcade con windjammers +10", latitude: -34.556578, longitude: -58.452443, categories: [CATEGORIES[0], CATEGORIES[1]] },
+    { id: 2, name: "El gato y la caja negra y la luna y los gatos", description: "Buenos chorizos", latitude: -34.561637, longitude: -58.463049, categories: [CATEGORIES[0]] },
+    { id: 3, name: "On Tap", description: "Me gustan los condimentos", latitude: -34.583137, longitude: -58.433931, categories: [CATEGORIES[0]] },
+    { id: 4, name: "Museo de ciencias naturales", description: "Buenos dinosaurios", latitude: -34.605045, longitude: -58.437525, categories: [CATEGORIES[4]] },
+    { id: 5, name: "Sala de reuniones", description: "Buenas cervezas", latitude: -34.590815, longitude: -58.427522, categories: [CATEGORIES[4]]}
 ];
 
 proposed_categories = [ ];
 
 app.get('/categories', function (req, res) {
   console.log("/categories");
-  res.json(categories);
+  res.json(CATEGORIES);
 });
 
 app.get('/proposed_categories', function (req, res) {
@@ -75,8 +75,8 @@ app.post('/accept_category', function (req, res) {
     }
   );
 
-  categories.push({
-    id: categories.length,
+  CATEGORIES.push({
+    id: CATEGORIES.length,
     name: accepted_category.name,
     description: accepted_category.description,
   });
@@ -92,7 +92,7 @@ app.post('/save_poi', function (req, res) {
     description: poi.description,
     latitude: poi.lat,
     longitude: poi.lng,
-    categories: poi.categories.map(cat_id => categories.find(c => c.id == cat_id)),
+    categories: poi.categories.map(cat_id => CATEGORIES.find(c => c.id == cat_id)),
   })
 });
 
