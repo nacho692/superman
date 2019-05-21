@@ -12,10 +12,10 @@ import { ProposedCategory } from '../domain/proposed-category';
 export class CategoryService {
 
   private newCategoryProposal = new Subject();
+  private modifiedCategoryProposals = new Subject();
 
   newCategoryProposalAnnounced = this.newCategoryProposal.asObservable();
-  acceptedCategoryProposal = this.acceptedCategoryProposal.asObservable();
-
+  modifiedCategoryProposalsAnnounced = this.modifiedCategoryProposals.asObservable();
   
   constructor() {}
 
@@ -27,20 +27,26 @@ export class CategoryService {
     return of(CATEGORIES);
   }
 
-  proposeCategory(name: string, description: string) {
-    let nextId : number = this.proposedCategories.length + 1;
-    PROPOSED_CATEGORIES.push({
-      id: nextId,
-      description: description,
-      name: name
-    });
-  }
-
   announceNewCategoryProposal() {
     this.newCategoryProposal.next();
   }
 
-  announceAcceptedCategory(ProposedCategory: Category) {
+  
+
+  announceAcceptedCategory(category: ProposedCategory) {
+    let nextId = CATEGORIES.length;
+    CATEGORIES.push({
+      name: category.name,
+      description: category.description,
+      id: nextId
+    })
+    this.modifiedCategoryProposals.next();
   }
 
+  announceRejectedCategory(rejected_category: ProposedCategory) {
+    PROPOSED_CATEGORIES = PROPOSED_CATEGORIES.filter(category => {
+      return category != rejected_category;
+    });
+    this.modifiedCategoryProposals.next();
+  }
 }

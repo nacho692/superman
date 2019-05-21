@@ -42,8 +42,14 @@ export class CategoryProposalFormComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.getCategories();
   }
 
+  getCategories(): void {
+    this.categoryService.getCategories()
+      .subscribe(categories => this.categories = categories);
+  }
+  
   proposeCategory() {
     this.newCategoryProposalQuestions = [
       new TextboxQuestion({
