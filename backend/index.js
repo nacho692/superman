@@ -1,7 +1,7 @@
 var express = require('express');
 var cors = require('cors');
 var app = express();
-app.use(cors({origin: "http://localhost:4200"}));
+app.use(cors());
 
 categories = [
   { name: "Bar", id: 1, description: "Papitas y alcohol"},
