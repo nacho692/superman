@@ -23,7 +23,7 @@ export class CategoryService {
   }
 
   getCategories() : Observable<Category[]> {
-    return this.http.get<Category[]>(backend_url + '/categories');;
+    return this.http.get<Category[]>(backend_url + '/categories');
   }
 
   announceNewCategoryProposal() {
@@ -31,7 +31,7 @@ export class CategoryService {
   }
 
   announceProposedCategory(name: string, description: string) {
-    this.http.post<Category>(backend_url + '/', {name: name, description: description})
+    this.http.post<Category>(backend_url + '/', {name: name, description: description});
   }
 
   announceAcceptedCategory(category: Category) {
