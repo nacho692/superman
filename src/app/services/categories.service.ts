@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Category } from '../domain/category';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { backend_url } from '../config/backend_url'
 
@@ -19,11 +19,13 @@ export class CategoryService {
   constructor(private http: HttpClient) {}
 
   getProposedCategories() : Observable<Category[]> {
-    return this.http.get<Category[]>(backend_url + '/proposed_categories');
+    return of([]);
+    //return this.http.get<Category[]>(backend_url + '/proposed_categories');
   }
 
   getCategories() : Observable<Category[]> {
-    return this.http.get<Category[]>(backend_url + '/categories');;
+    return of([]);
+    //return this.http.get<Category[]>(backend_url + '/categories');;
   }
 
   announceNewCategoryProposal() {
