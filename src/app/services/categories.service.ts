@@ -13,10 +13,12 @@ export class CategoryService {
   private newCategoryProposal = new Subject();
   private modifiedCategories = new Subject();
   private showProposals = new Subject();
+  private categoryEdition = new Subject();
 
   showProposalsAnnounced = this.showProposals.asObservable();
   newCategoryProposalAnnounced = this.newCategoryProposal.asObservable();
-  modifiedCategoriesAnnounced = this.modifiedCategories.asObservable();
+  modifiedCategoriesAnnounced = this.modifiedCategories.asObservable(); // For category acceptance/rejection
+  categoryEditionAnnounced = this.categoryEdition.asObservable(); // For category edition purposes
   
   constructor(private http: HttpClient) {}
 
@@ -39,6 +41,10 @@ export class CategoryService {
   announceProposedCategory(name: string, description: string) {
     this.http.post(backend_url + '/proposed_categories', {name, description}, {responseType: 'json'}).subscribe(res => {
     });
+  }
+
+  announceCategoryEdition(category: Category) {
+    this.categoryEdition.next();
   }
 
   save(category: Category) {

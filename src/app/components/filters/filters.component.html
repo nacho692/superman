@@ -1,5 +1,6 @@
 <ul class="categories list-group">
     <li *ngFor="let category of categories" [class.active]="selectedCategories.has(category)" (click)="onSelect(category)" class="category list-group-item list-group-item-action list-group-item-secondary">
         {{category.name}}
+        <div (click)="onEdit(category)">BOTON</div>
     </li>
 </ul>

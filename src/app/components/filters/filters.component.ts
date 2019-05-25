@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Category } from '../../domain/category';
 import { CategoryService } from '../../services/categories.service';
 import { SearchService } from 'src/app/services/search.service';
+import { getHeapStatistics } from 'v8';
 
 @Component({
   selector: 'app-filters',
@@ -31,6 +32,10 @@ export class FiltersComponent implements OnInit {
       this.selectedCategories.add(category);
     }
     this.searchService.announceNewCategories(this.selectedCategories);
+  }
+  
+  onEdit(category: Category) {
+    this.categoryService.announceCategoryEdition(category);
   }
 
   getCategories(): void {
