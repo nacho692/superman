@@ -18,10 +18,9 @@ export class PointsOfInterestService {
     return this.http.post<PointOfInterest[]>(backend_url + '/search_pois', {query: query, categories: categories});
   }
 
-  save(lat: number, lng: number, name: string, description: string, categories: number[]) {
-    let poi = {name: name, description: description, lat: lat, lng: lng, categories: categories};
-    console.log(backend_url + '/save_poi');
-    console.log(JSON.stringify(poi))
-    this.http.post<any>(backend_url + '/save_poi', poi);   
+  save(lat: number, lng: number, name: string, description: string, categories: number[], image_url: string) {
+    let poi = {name: name, description: description, lat: lat, lng: lng, categories: categories, image_url: image_url};
+    console.log(JSON.stringify(poi));
+    this.http.post<any>(backend_url + '/save_poi', poi);
   }
 }
