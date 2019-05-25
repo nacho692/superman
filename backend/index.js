@@ -97,8 +97,7 @@ app.post('/points_of_interest', function (req, res) {
     categories: poi.categories.map(cat_id => CATEGORIES.find(c => c.id === cat_id)),
     image_url: poi.image_url,
   });
-  //console.log(JSON.stringify(POIS))
-  //res.sendStatus(200);
+  res.sendStatus(200);
 });
 
 app.post('/points_of_interest/search', function (req, res) {
