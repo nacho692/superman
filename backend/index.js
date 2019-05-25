@@ -17,11 +17,16 @@ const CATEGORIES = [
 ];
 
 POIS = [
-    { id: 1, name: "La Birreria", description: "Tienen un arcade con windjammers +10", latitude: -34.556578, longitude: -58.452443, categories: [CATEGORIES[0], CATEGORIES[1]] },
-    { id: 2, name: "El gato y la caja negra y la luna y los gatos", description: "Buenos chorizos", latitude: -34.561637, longitude: -58.463049, categories: [CATEGORIES[0]] },
-    { id: 3, name: "On Tap", description: "Me gustan los condimentos", latitude: -34.583137, longitude: -58.433931, categories: [CATEGORIES[0]] },
-    { id: 4, name: "Museo de ciencias naturales", description: "Buenos dinosaurios", latitude: -34.605045, longitude: -58.437525, categories: [CATEGORIES[4]] },
-    { id: 5, name: "Sala de reuniones", description: "Buenas cervezas", latitude: -34.590815, longitude: -58.427522, categories: [CATEGORIES[4]]}
+    { id: 1, name: "La Birreria", description: "Tienen un arcade con windjammers +10",
+      latitude: -34.556578, longitude: -58.452443, categories: [CATEGORIES[0], CATEGORIES[1]], image_url: "" },
+    { id: 2, name: "El gato y la caja negra y la luna y los gatos", description: "Buenos chorizos",
+      latitude: -34.561637, longitude: -58.463049, categories: [CATEGORIES[0]], image_url: "" },
+    { id: 3, name: "On Tap", description: "Me gustan los condimentos",
+      latitude: -34.583137, longitude: -58.433931, categories: [CATEGORIES[0]], image_url: "" },
+    { id: 4, name: "Museo de ciencias naturales", description: "Buenos dinosaurios",
+      latitude: -34.605045, longitude: -58.437525, categories: [CATEGORIES[4]], image_url: "" },
+    { id: 5, name: "Sala de reuniones", description: "Buenas cervezas",
+      latitude: -34.590815, longitude: -58.427522, categories: [CATEGORIES[4]], image_url: "" }
 ];
 
 PROPOSED_CATEGORIES = [ ];
@@ -86,6 +91,7 @@ app.post('/accept_category', function (req, res) {
 
 
 app.post('/save_poi', function (req, res) {
+  console.log("SAVE POI PAYLOAD:");
   console.log(req.body);
   let poi = req.body;
   POIS.push({
@@ -95,12 +101,15 @@ app.post('/save_poi', function (req, res) {
     latitude: poi.lat,
     longitude: poi.lng,
     categories: [poi.categories.map(cat_id => CATEGORIES.find(c => c.id === cat_id))],
+    image_url: poi.image_url,
   });
-  console.log(JSON.stringify(POIS))
-  res.sendStatus(200);
+  console.log(POIS);
+  //console.log(JSON.stringify(POIS))
+  //res.sendStatus(200);
 });
 
 app.post('/search_pois', function (req, res) {
+  console.log("SEARCH POIS BODY:");
   console.log(req.body);
   let query = req.body.query;
   let categories = req.body.categories;

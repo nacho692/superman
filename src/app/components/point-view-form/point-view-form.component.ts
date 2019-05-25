@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MapService } from 'src/app/services/map.service';
 import { PointOfInterest } from 'src/app/domain/point-of-interest';
-import { Category } from 'src/app/domain/category';
 import { CategoryService } from 'src/app/services/categories.service';
 
 @Component({

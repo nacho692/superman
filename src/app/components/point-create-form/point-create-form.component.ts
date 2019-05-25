@@ -60,6 +60,11 @@ export class PointCreateFormComponent implements OnInit {
           key: "categories",
           order: 3,
           options: categories.map(c => ({key: c.id, name: c.name})),
+        }),
+        new TextboxQuestion({
+          key: "image_url",
+          label: "Image",
+          order: 3
         })
       ];
     })
@@ -74,8 +79,7 @@ export class PointCreateFormComponent implements OnInit {
         }
       }
     );
-    
-    this.pointOfInteresetService.save(this.newPointCoords[0], this.newPointCoords[1], payload.name, payload.description, categories);
+    this.pointOfInteresetService.save(this.newPointCoords[0], this.newPointCoords[1], payload.name, payload.description, categories, payload.image_url);
     this.shouldShow = false;
   }
 

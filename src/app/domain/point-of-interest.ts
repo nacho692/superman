@@ -7,4 +7,5 @@ export class PointOfInterest {
     latitude: number;
     longitude: number;
     categories: Category[];
+    image_url: string = "";
 }
