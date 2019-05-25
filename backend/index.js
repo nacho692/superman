@@ -16,7 +16,7 @@ const CATEGORIES = [
   { name: "Museo", id: 5, description: "Huesos de dinosaurios"}
 ];
 
-const POIS = [
+POIS = [
     { id: 1, name: "La Birreria", description: "Tienen un arcade con windjammers +10", latitude: -34.556578, longitude: -58.452443, categories: [CATEGORIES[0], CATEGORIES[1]] },
     { id: 2, name: "El gato y la caja negra y la luna y los gatos", description: "Buenos chorizos", latitude: -34.561637, longitude: -58.463049, categories: [CATEGORIES[0]] },
     { id: 3, name: "On Tap", description: "Me gustan los condimentos", latitude: -34.583137, longitude: -58.433931, categories: [CATEGORIES[0]] },
@@ -24,7 +24,7 @@ const POIS = [
     { id: 5, name: "Sala de reuniones", description: "Buenas cervezas", latitude: -34.590815, longitude: -58.427522, categories: [CATEGORIES[4]]}
 ];
 
-proposed_categories = [ ];
+PROPOSED_CATEGORIES = [ ];
 
 app.get('/categories', function (req, res) {
   console.log("/categories");
@@ -33,7 +33,7 @@ app.get('/categories', function (req, res) {
 
 app.get('/proposed_categories', function (req, res) {
   console.log("/proposed_categories");
-  res.json(proposed_categories);
+  res.json(PROPOSED_CATEGORIES);
 });
 
 app.post('/proposed_categories', function (req, res) {
@@ -41,7 +41,7 @@ app.post('/proposed_categories', function (req, res) {
   let proposed_category = req.body;
 
   new_proposed_category = {
-    id: proposed_categories.length,
+    id: PROPOSED_CATEGORIES.length,
     name: proposed_category.name,
     description: proposed_category.description,
   };
@@ -56,7 +56,7 @@ app.post('/reject_category', function (req, res) {
   console.log(req.body);
   let rejected_category = req.body;
 
-  proposed_categories = proposed_categories.filter(
+  PROPOSED_CATEGORIES = PROPOSED_CATEGORIES.filter(
     pc => category.id != rejected_category.id
   );
 });
@@ -65,7 +65,7 @@ app.post('/accept_category', function (req, res) {
   console.log(req.body);
   let accepted_category = req.body;
 
-  proposed_categories = proposed_categories.filter(
+  PROPOSED_CATEGORIES = PROPOSED_CATEGORIES.filter(
     function(category, index, arr) {
       return category.id != accepted_category.id;
     }
