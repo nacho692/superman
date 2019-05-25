@@ -1,0 +1,9 @@
+.accept-category {
+    cursor: pointer;
+    color: green;
+}
+
+.reject-category {
+    cursor: pointer;
+    color: red;
+}

@@ -15,10 +15,13 @@ export class FiltersComponent implements OnInit {
 
   constructor(private categoryService: CategoryService, private searchService: SearchService) { 
     this.selectedCategories = new Set();
+    this.getCategories();
+    this.categoryService.modifiedCategoriesAnnounced.subscribe(_ => {
+      this.getCategories();
+    });
   }
 
   ngOnInit() {
-    this.getCategories();
   }
 
   onSelect(category: Category) {
