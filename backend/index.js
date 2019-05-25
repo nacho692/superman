@@ -41,21 +41,19 @@ app.get('/proposed_categories', function (req, res) {
   res.json(PROPOSED_CATEGORIES);
 });
 
-app.post('/propose_category', function (req, res) {
-  console.log(req.body);
+app.post('/proposed_categories', function (req, res) {
+  console.log(req.body)
   let proposed_category = req.body;
 
-  PROPOSED_CATEGORIES = PROPOSED_CATEGORIES.filter(
-    function(category, index, arr) {
-      return category.id != accepted_category.id;
-    }
-  );
-
-  PROPOSED_CATEGORIES.push({
+  new_proposed_category = {
     id: PROPOSED_CATEGORIES.length,
     name: proposed_category.name,
     description: proposed_category.description,
-  });
+  };
+
+  proposed_categories.push(new_proposed_category);
+
+  res.json(new_proposed_category);
 });
 
 
@@ -64,9 +62,7 @@ app.post('/reject_category', function (req, res) {
   let rejected_category = req.body;
 
   PROPOSED_CATEGORIES = PROPOSED_CATEGORIES.filter(
-    function(category, index, arr) {
-      return category.id != rejected_category.id;
-    }
+    pc => category.id != rejected_category.id
   );
 });
 
@@ -89,9 +85,7 @@ app.post('/accept_category', function (req, res) {
   res.sendStatus(200)
 });
 
-
-app.post('/save_poi', function (req, res) {
-  console.log("SAVE POI PAYLOAD:");
+app.post('/points_of_interest', function (req, res) {
   console.log(req.body);
   let poi = req.body;
   POIS.push({
@@ -100,16 +94,14 @@ app.post('/save_poi', function (req, res) {
     description: poi.description,
     latitude: poi.lat,
     longitude: poi.lng,
-    categories: [poi.categories.map(cat_id => CATEGORIES.find(c => c.id === cat_id))],
+    categories: poi.categories.map(cat_id => CATEGORIES.find(c => c.id === cat_id)),
     image_url: poi.image_url,
   });
-  console.log(POIS);
   //console.log(JSON.stringify(POIS))
   //res.sendStatus(200);
 });
 
-app.post('/search_pois', function (req, res) {
-  console.log("SEARCH POIS BODY:");
+app.post('/points_of_interest/search', function (req, res) {
   console.log(req.body);
   let query = req.body.query;
   let categories = req.body.categories;

@@ -25,6 +25,9 @@ export class PointViewFormComponent implements OnInit {
       this.categoryService.newCategoryProposalAnnounced.subscribe( _ => {
         this.shouldShow = false;
       });
+      this.categoryService.showProposalsAnnounced.subscribe(_ => {
+        this.shouldShow = false;
+      });
   }
   
   ngOnInit() {
