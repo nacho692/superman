@@ -9,8 +9,11 @@
                     <div class="col-12 py-4" id="content-results">
                         <app-results></app-results>
                     </div>
-                    <div class="col-12">
+                    <div *hasRole="'user'" class="col-12">
                         <app-category-proposal></app-category-proposal>
+                    </div>
+                    <div *hasRole="'admin'" class="col-12">
+                        <app-show-proposals></app-show-proposals>
                     </div>
                 </div>
             </div>

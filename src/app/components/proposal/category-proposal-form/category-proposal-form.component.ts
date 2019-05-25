@@ -30,6 +30,9 @@ export class CategoryProposalFormComponent implements OnInit {
       this.mapService.pointSelectedAnnounced.subscribe( _ => {
         this.shouldShow = false;
       });
+      this.categoryService.showProposalsAnnounced.subscribe(_ => {
+        this.shouldShow = false;
+      });
       this.categoryService.newCategoryProposalAnnounced.subscribe( _ => {
         this.proposeCategory();
         this.shouldShow = true;
@@ -65,8 +68,8 @@ export class CategoryProposalFormComponent implements OnInit {
     this.mapService.announceCardCanceled();
   }
   
-  onSubmit(name: string, description: string) {
-    this.categoryService.announceProposedCategory(name,description);
+  onSubmit(payload: any) {
+    this.categoryService.announceProposedCategory(payload);
     this.shouldShow = false;
  }
 

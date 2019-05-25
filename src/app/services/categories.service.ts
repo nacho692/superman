@@ -12,7 +12,9 @@ export class CategoryService {
 
   private newCategoryProposal = new Subject();
   private modifiedCategoryProposals = new Subject();
+  private showProposals = new Subject();
 
+  showProposalsAnnounced = this.showProposals.asObservable();
   newCategoryProposalAnnounced = this.newCategoryProposal.asObservable();
   modifiedCategoryProposalsAnnounced = this.modifiedCategoryProposals.asObservable();
   
@@ -29,9 +31,15 @@ export class CategoryService {
   announceNewCategoryProposal() {
     this.newCategoryProposal.next();
   }
+  
+  announceShowProposals() {
+    this.showProposals.next();
+  }
 
-  announceProposedCategory(name: string, description: string) {
-    this.http.post<Category>(backend_url + '/', {name: name, description: description});
+  announceProposedCategory(payload: any) {
+    this.http.post<any>(backend_url + '/proposed_categories', payload).subscribe(res => {
+      console.log(res);
+    });
   }
 
   announceAcceptedCategory(category: Category) {

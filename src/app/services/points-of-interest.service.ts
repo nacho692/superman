@@ -15,13 +15,13 @@ export class PointsOfInterestService {
   constructor(private http: HttpClient) {}
 
   search(query: string, categories: number[]): Observable<PointOfInterest[]> {
-    return this.http.post<PointOfInterest[]>(backend_url + '/search_pois', {query: query, categories: categories});
+    return this.http.post<PointOfInterest[]>(backend_url + '/points_of_interest/search', {query: query, categories: categories});
   }
 
   save(lat: number, lng: number, name: string, description: string, categories: number[]) {
     let poi = {name: name, description: description, lat: lat, lng: lng, categories: categories};
-    console.log(backend_url + '/save_poi');
-    console.log(JSON.stringify(poi))
-    this.http.post<any>(backend_url + '/save_poi', poi);   
+    this.http.post<any>(backend_url + '/points_of_interest', poi).subscribe(res => {
+      console.log(res);
+    });
   }
 }
