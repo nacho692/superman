@@ -22,6 +22,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ShowProposalsComponent } from './components/proposal/show-proposals/show-proposals.component';
 import { ProposedCategoriesFormComponent } from './components/proposal/proposed-categories-form/proposed-categories-form.component';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ProposedCategoriesFormComponent } from './components/proposal/proposed-
     ReactiveFormsModule,
     NgbModule,
     HttpClientModule,
+    Angular2FontawesomeModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDP827zHnIce50b1GTB8QPrHOUBFwcsGyw'
     })

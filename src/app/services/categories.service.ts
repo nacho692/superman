@@ -11,12 +11,12 @@ import { backend_url } from '../config/backend_url'
 export class CategoryService {
 
   private newCategoryProposal = new Subject();
-  private modifiedCategoryProposals = new Subject();
+  private modifiedCategories = new Subject();
   private showProposals = new Subject();
 
   showProposalsAnnounced = this.showProposals.asObservable();
   newCategoryProposalAnnounced = this.newCategoryProposal.asObservable();
-  modifiedCategoryProposalsAnnounced = this.modifiedCategoryProposals.asObservable();
+  modifiedCategoriesAnnounced = this.modifiedCategories.asObservable();
   
   constructor(private http: HttpClient) {}
 
@@ -36,19 +36,19 @@ export class CategoryService {
     this.showProposals.next();
   }
 
-  announceProposedCategory(payload: any) {
-    this.http.post<any>(backend_url + '/proposed_categories', payload).subscribe(res => {
-      console.log(res);
+  announceProposedCategory(name: string, description: string) {
+    this.http.post(backend_url + '/proposed_categories', {name, description}, {responseType: 'json'}).subscribe(res => {
     });
   }
 
-  announceAcceptedCategory(category: Category) {
-    this.http.post<any>(backend_url + '/accept_category', category);
-    this.modifiedCategoryProposals.next();
+  save(category: Category) {
+    this.http.post(backend_url + '/categories', category).subscribe(res => {
+      this.modifiedCategories.next();
+    });
   }
 
-  announceRejectedCategory(category: Category) {
-    this.http.post<any>(backend_url + '/reject_category', category);
-    this.modifiedCategoryProposals.next();
+  removeCategoryProposal(category: Category) {
+    this.http.delete(backend_url + '/proposed_categories/' + category.id, {responseType: 'text'}).subscribe(res => {
+    });
   }
 }

@@ -29,7 +29,8 @@ POIS = [
       latitude: -34.590815, longitude: -58.427522, categories: [CATEGORIES[4]], image_url: "" }
 ];
 
-PROPOSED_CATEGORIES = [ ];
+PROPOSED_CATEGORIES = [ { "id":0, "name":"Lugares Oscuros", "description":"Donde no se ve nada y la magia está en el aire" },
+                        { "id":1, "name":"Cat Propuesta", "description":"Una categoria propuesta nueva" } ];
 
 app.get('/categories', function (req, res) {
   console.log("/categories");
@@ -51,38 +52,36 @@ app.post('/proposed_categories', function (req, res) {
     description: proposed_category.description,
   };
 
-  proposed_categories.push(new_proposed_category);
+  PROPOSED_CATEGORIES.push(new_proposed_category);
 
   res.json(new_proposed_category);
 });
 
 
-app.post('/reject_category', function (req, res) {
-  console.log(req.body);
-  let rejected_category = req.body;
-
+app.delete('/proposed_categories/:id', function (req, res) {
+  console.log("deleting proposed category " + req.params.id)
   PROPOSED_CATEGORIES = PROPOSED_CATEGORIES.filter(
-    pc => category.id != rejected_category.id
+    pc => pc.id != req.params.id
   );
+  res.sendStatus(200);
 });
 
-app.post('/accept_category', function (req, res) {
+app.post('/categories', function (req, res) {
   console.log(req.body);
   let accepted_category = req.body;
 
   PROPOSED_CATEGORIES = PROPOSED_CATEGORIES.filter(
-    function(category, index, arr) {
-      return category.id != accepted_category.id;
-    }
+    pc => pc.id != accepted_category.id
   );
 
-  CATEGORIES.push({
+  new_category = {
     id: CATEGORIES.length,
     name: accepted_category.name,
-    description: accepted_category.description,
-  });
+    description: accepted_category.description
+  }
+  CATEGORIES.push(new_category);
 
-  res.sendStatus(200)
+  res.json(new_category);
 });
 
 app.post('/points_of_interest', function (req, res) {

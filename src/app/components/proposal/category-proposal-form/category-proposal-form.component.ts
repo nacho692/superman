@@ -4,6 +4,7 @@ import { SearchService } from 'src/app/services/search.service';
 import { MapService } from 'src/app/services/map.service';
 import { QuestionBase } from 'src/app/utils/question-base';
 import { TextboxQuestion } from 'src/app/utils/question-textbox';
+import { Category } from 'src/app/domain/category';
 
 @Component({
   selector: 'app-category-proposal-form',
@@ -69,7 +70,7 @@ export class CategoryProposalFormComponent implements OnInit {
   }
   
   onSubmit(payload: any) {
-    this.categoryService.announceProposedCategory(payload);
+    this.categoryService.announceProposedCategory(payload.name, payload.description);
     this.shouldShow = false;
  }
 

@@ -18,32 +18,41 @@ export class ProposedCategoriesFormComponent implements OnInit {
     private categoryService: CategoryService) { 
     this.categoryService.showProposalsAnnounced.subscribe(_ => {
       this.shouldShow = true;
+      this.getProposedCategories();
     });
     this.categoryService.newCategoryProposalAnnounced.subscribe(_ => {
-      this.shouldShow = false;
-    });
-    this.mapService.cardCanceledAnnounced.subscribe(_ => {
       this.shouldShow = false;
     });
     this.mapService.newPointAnnounced.subscribe(_ => {
       this.shouldShow = false;
     });
+    this.mapService.pointSelectedAnnounced.subscribe(_ => {
+      this.shouldShow = false;
+    })
   };
 
   ngOnInit() {
-    this.getCategories();
   }
 
-  onAccept(category: Category) {
-    this.categoryService.announceAcceptedCategory(category);
+  close() {
+    this.shouldShow = false;
+    this.mapService.announceCardCanceled();
+  }
+
+  acceptCategory(category: Category) {
+    this.categoryService.save(category);
+    this.proposedCategories = this.proposedCategories
+      .filter(pc => pc.id != category.id);
   }
   
-  onReject(category: Category) {
-    this.categoryService.announceRejectedCategory(category);
+  rejectCategory(category: Category) {
+    this.categoryService.removeCategoryProposal(category);
+    this.proposedCategories = this.proposedCategories
+      .filter(pc => pc.id != category.id);
   }
 
-  getCategories(): void {
-    this.categoryService.getCategories()
-      .subscribe(categories => this.proposedCategories = categories);
+  getProposedCategories(): void {
+    this.categoryService.getProposedCategories()
+      .subscribe(proposedCategories => this.proposedCategories = proposedCategories);
   }
 }
