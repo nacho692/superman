@@ -89,7 +89,7 @@ app.post('/points_of_interest', function (req, res) {
   console.log(req.body);
   let poi = req.body;
   POIS.push({
-    id: POIS.length,
+    id: POIS.length + 1,
     name: poi.name,
     description: poi.description,
     latitude: poi.lat,
