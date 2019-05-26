@@ -28,7 +28,10 @@ export class ProposedCategoriesFormComponent implements OnInit {
     });
     this.mapService.pointSelectedAnnounced.subscribe(_ => {
       this.shouldShow = false;
-    })
+    });
+    this.categoryService.categoryEditionAnnounced.subscribe(category => {
+      this.shouldShow = false;
+    });
   };
 
   ngOnInit() {

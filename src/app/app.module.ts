@@ -14,15 +14,16 @@ import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.com
 import { DynamicFormQuestionComponent } from './components/dynamic-form-question/dynamic-form-question.component';
 import { PointCreateFormComponent } from './components/point-of-interest/point-create-form/point-create-form.component';
 import { PointViewFormComponent } from './components/point-of-interest/point-view-form/point-view-form.component';
-import { CategoryProposalComponent } from './components/proposal/category-proposal/category-proposal.component';
-import { CategoryProposalFormComponent } from './components/proposal/category-proposal-form/category-proposal-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { HasRoleDirective } from './directives/has-role.directive';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import { ShowProposalsComponent } from './components/proposal/show-proposals/show-proposals.component';
-import { ProposedCategoriesFormComponent } from './components/proposal/proposed-categories-form/proposed-categories-form.component';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
+import { CategoryProposalFormComponent } from './components/categories/category-proposal-form/category-proposal-form.component';
+import { ShowProposalsButtonComponent } from './components/categories/show-proposals-button/show-proposals-button.component';
+import { ProposedCategoriesFormComponent } from './components/categories/proposed-categories-form/proposed-categories-form.component';
+import { CategoryProposalButtonComponent } from './components/categories/category-proposal-button/category-proposal-button.component';
+import { CategoryProposalEditFormComponent } from './components/categories/category-edit-form/category-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -37,11 +38,12 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
     DynamicFormQuestionComponent,
     PointCreateFormComponent,
     PointViewFormComponent,
-    CategoryProposalComponent,
+    CategoryProposalButtonComponent,
     CategoryProposalFormComponent,
     LoginComponent,
-    ShowProposalsComponent,
+    ShowProposalsButtonComponent,
     ProposedCategoriesFormComponent,
+    CategoryProposalEditFormComponent,
     HasRoleDirective
   ],
   imports: [

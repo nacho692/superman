@@ -1,6 +1,14 @@
 <ul class="categories list-group">
-    <li *ngFor="let category of categories" [class.active]="selectedCategories.has(category)" (click)="onSelect(category)" class="category list-group-item list-group-item-action list-group-item-secondary">
-        {{category.name}}
-        <div (click)="onEdit(category)">BOTON</div>
+    <li *ngFor="let category of categories" [class.active]="selectedCategories.has(category)" [class.list-group-item-danger]="!category.should_show" class="category list-group-item list-group-item-action list-group-item-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col category" (click)="onSelect(category)">
+                    {{category.name}}
+                </div>
+                <div *hasRole="'admin'" lass="col-3">
+                    <i (click)="onEdit(category)" class="fa fa-edit"></i>
+                </div>
+            </div>
+        </div>
     </li>
 </ul>

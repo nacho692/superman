@@ -18,7 +18,9 @@ export class FiltersComponent implements OnInit {
     this.selectedCategories = new Set();
     this.getCategories();
     this.categoryService.modifiedCategoriesAnnounced.subscribe(_ => {
+      this.selectedCategories = new Set();
       this.getCategories();
+      this.searchService.announceNewCategories(this.selectedCategories);
     });
   }
 

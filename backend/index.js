@@ -8,19 +8,19 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-const CATEGORIES = [
-  { name: "Bar", id: 1, description: "Papitas y alcohol"},
-  { name: "Teatro", id: 2, description: "Papitas y gente que actúa"},
-  { name: "Espacio cultural", id: 3, description: "Hippies"},
-  { name: "Cine", id: 4, description: "Peliculas y pochocolos"},
-  { name: "Museo", id: 5, description: "Huesos de dinosaurios"}
+CATEGORIES = [
+  { name: "Bar", id: 1, description: "Papitas y alcohol", should_show: true},
+  { name: "Teatro", id: 2, description: "Papitas y gente que actúa", should_show: true},
+  { name: "Espacio cultural", id: 3, description: "Hippies", should_show: true},
+  { name: "Cine", id: 4, description: "Peliculas y pochocolos", should_show: false},
+  { name: "Museo", id: 5, description: "Huesos de dinosaurios", should_show: true}
 ];
 
 POIS = [
     { id: 1, name: "La Birreria", description: "Tienen un arcade con windjammers +10",
       latitude: -34.556578, longitude: -58.452443, categories: [CATEGORIES[0], CATEGORIES[1]], image_url: "" },
     { id: 2, name: "El gato y la caja negra y la luna y los gatos", description: "Buenos chorizos",
-      latitude: -34.561637, longitude: -58.463049, categories: [CATEGORIES[0]], image_url: "" },
+      latitude: -34.561637, longitude: -58.463049, categories: [CATEGORIES[0]], image_url: "https://i.imgur.com/H37kxPH.jpg" },
     { id: 3, name: "On Tap", description: "Me gustan los condimentos",
       latitude: -34.583137, longitude: -58.433931, categories: [CATEGORIES[0]], image_url: "" },
     { id: 4, name: "Museo de ciencias naturales", description: "Buenos dinosaurios",
@@ -33,17 +33,40 @@ PROPOSED_CATEGORIES = [ { "id":0, "name":"Lugares Oscuros", "description":"Donde
                         { "id":1, "name":"Cat Propuesta", "description":"Una categoria propuesta nueva" } ];
 
 app.get('/categories', function (req, res) {
-  console.log("/categories");
+  let isAdminCalling = req.query.caller == "admin";
+  console.log("retrieving categories: admin " + isAdminCalling);
+  res.json(CATEGORIES.filter(c => {
+    if(!isAdminCalling) {
+      return c.should_show;
+    } else {
+      return true;
+    }
+  }));
+});
+
+app.put('/categories/:id', function (req, res) {
+  let id = req.params.id;
+  console.log("editing category " + id)
+  category = req.body;
+  category.id = parseInt(id);
+  console.log(category)
+  CATEGORIES = CATEGORIES.map(c => {
+    if (c.id == id) {
+      return category;
+    } else {
+      return c;
+    }
+  })
   res.json(CATEGORIES);
 });
 
 app.get('/proposed_categories', function (req, res) {
-  console.log("/proposed_categories");
+  console.log("get proposed categories");
   res.json(PROPOSED_CATEGORIES);
 });
 
 app.post('/proposed_categories', function (req, res) {
-  console.log(req.body)
+  console.log("new proposed category")
   let proposed_category = req.body;
 
   new_proposed_category = {
@@ -75,7 +98,7 @@ app.post('/categories', function (req, res) {
   );
 
   new_category = {
-    id: CATEGORIES.length,
+    id: CATEGORIES.length + 1,
     name: accepted_category.name,
     description: accepted_category.description
   }
@@ -100,13 +123,16 @@ app.post('/points_of_interest', function (req, res) {
 });
 
 app.post('/points_of_interest/search', function (req, res) {
-  console.log(req.body);
+  console.log("searching pois");
   let query = req.body.query;
   let categories = req.body.categories;
+  let isAdminCalling = req.params.caller == "admin";
+
   query = query.toLowerCase();
 
   if (query == "" && categories.length == 0) {
-    return new Array();
+    res.json([]);
+    return;
   }
   
   found_pois = POIS.filter(poi => {
@@ -118,8 +144,12 @@ app.post('/points_of_interest/search', function (req, res) {
     if (categories.length > 0) {
       categoryFound = poi.categories.some(poi_category => categories.includes(poi_category.id));
     }
+    let shouldBeVisible = true;
+    if (!isAdminCalling) {
+    }
     return searchFound && categoryFound;
   });
+
   res.json(found_pois);
 });
 

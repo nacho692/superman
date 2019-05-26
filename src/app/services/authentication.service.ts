@@ -19,11 +19,16 @@ export class AuthenticationService {
   }
 
   logout() {
-      localStorage.removeItem("currentUser");
+    localStorage.removeItem("currentUser");
   }
 
-  isAdmin() {
-      let user = JSON.parse(localStorage.getItem("currentUser"));
-      return (user != null && user.role == "admin")  
+  isAdmin(): boolean {
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+    return (user != null && user.role == "admin")  
+  }
+
+  getCaller(): string{
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+    return user? user.role: null;
   }
 }

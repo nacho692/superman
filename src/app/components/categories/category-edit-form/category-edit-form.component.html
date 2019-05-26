@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-11">
-                    New Point of Interest
+                    Edit Category
                 </div>
                 <div class="col-1">
                     <i class="fa fa-times pointer" (click)="close()"></i>
@@ -12,6 +12,6 @@
         </div>
     </div>
     <div class="card-body">
-        <app-dynamic-form (formSubmit)="onSubmit($event)" [questions]="newPointQuestions"></app-dynamic-form>
+        <app-dynamic-form (formSubmit)="onSubmit($event)" [questions]="newCategoryProposalQuestions"></app-dynamic-form>
     </div>
 </div>

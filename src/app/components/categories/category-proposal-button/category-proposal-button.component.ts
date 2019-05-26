@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/services/categories.service';
 
 @Component({
-  selector: 'app-category-proposal',
-  templateUrl: './category-proposal.component.html',
-  styleUrls: ['./category-proposal.component.css']
+  selector: 'app-category-proposal-button',
+  templateUrl: './category-proposal-button.component.html',
+  styleUrls: ['./category-proposal-button.component.css']
 })
-export class CategoryProposalComponent implements OnInit {
+export class CategoryProposalButtonComponent implements OnInit {
 
   constructor(private categoryService: CategoryService) {}
 

@@ -1,5 +1,14 @@
 <ul class="list-group" id="results">
-    <li *ngFor="let point of points" [class.active]="selectedPoint === point" class="list-group-item result" (click)="resultSelected(point)">
-        <small>{{point.name}}</small>
+    <li *ngFor="let point of points" [class.active]="selectedPoint === point" class="list-group-item result">
+        <div class="container">
+            <div class="row">
+                <div class="col result" (click)="resultSelected(point)">
+                    <small>{{point.name}}</small>
+                </div>
+                <div *hasRole="'admin'" lass="col-3">
+                    <i (click)="onEdit(result)" class="fa fa-edit"></i>
+                </div>
+            </div>
+        </div>
     </li>
 </ul>

@@ -6,22 +6,29 @@
                     {{ point.name }}
                 </div>
                 <div class="col-1">
-                    <button type="button" class="close" aria-label="Close" (click)="close()">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                    <img [src]="point.image_url" width="500" height="333">
+                    <i class="fa fa-times pointer" (click)="close()"></i>
                 </div>
             </div>
         </div>
     </div>
     <div class="card-body">
-        <ul>
-            <li *ngFor="let category of point.categories">
-                {{ category.name }}
-            </li>
-        </ul>
-        <div>
-            {{ point.description }}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">`
+                    <ul>
+                        <li *ngFor="let category of point.categories">
+                            {{ category.name }}
+                        </li>
+                    </ul>
+                    <div>
+                        {{ point.description }}
+                    </div>
+                </div>
+                <div *ngIf="point.image_url" class="col-8">
+                    <a [href]="point.image_url" target="_blank">
+                        <img [src]="point.image_url" width="333" height="333">
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-</div>
