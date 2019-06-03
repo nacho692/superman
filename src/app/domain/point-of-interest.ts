@@ -8,4 +8,5 @@ export class PointOfInterest {
     longitude: number;
     categories: Category[];
     image_url: string = "";
+    should_show: boolean;
 }

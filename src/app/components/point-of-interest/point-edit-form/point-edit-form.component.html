@@ -1,0 +1,17 @@
+<div *ngIf="shouldShow">
+    <div class="card-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-11">
+                    Edit Point
+                </div>
+                <div class="col-1">
+                    <i class="fa fa-times pointer" (click)="close()"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <app-dynamic-form (formSubmit)="onSubmit($event)" [questions]="editPointsQuestions"></app-dynamic-form>
+    </div>
+</div>

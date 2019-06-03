@@ -28,8 +28,10 @@ export class CategoryService {
   }
 
   getCategories() : Observable<Category[]> {
-    let params = { caller: this.authenticationService.getCaller() } 
-    return this.http.get<Category[]>(backend_url + '/categories', { params: params });
+    var headers = new HttpHeaders({
+      "caller": this.authenticationService.getCaller(),
+    });
+    return this.http.get<Category[]>(backend_url + '/categories', { headers: headers });
   }
 
   announceNewCategoryProposal() {

@@ -4,6 +4,7 @@ import { SearchService } from 'src/app/services/search.service';
 import { MapService } from 'src/app/services/map.service';
 import { QuestionBase } from 'src/app/utils/question-base';
 import { TextboxQuestion } from 'src/app/utils/question-textbox';
+import { PointsOfInterestService } from 'src/app/services/points-of-interest.service';
 
 @Component({
   selector: 'app-category-proposal-form',
@@ -20,7 +21,8 @@ export class CategoryProposalFormComponent implements OnInit {
 
   constructor(private mapService: MapService,
     private searchService: SearchService,
-    private categoryService: CategoryService) {
+    private categoryService: CategoryService,
+    private pointOfInterestService: PointsOfInterestService) {
       this.mapService.newPointAnnounced.subscribe(coords => {
         this.shouldShow = false;
       });
@@ -38,6 +40,9 @@ export class CategoryProposalFormComponent implements OnInit {
         this.shouldShow = true;
       });
       this.categoryService.categoryEditionAnnounced.subscribe(category => {
+        this.shouldShow = false;
+      });
+      this.pointOfInterestService.pointEditedAnnouncement.subscribe( _ => {
         this.shouldShow = false;
       });
     }

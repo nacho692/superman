@@ -21,7 +21,7 @@ export class PointCreateFormComponent implements OnInit {
   constructor(private mapService: MapService, 
     private searchService: SearchService,
     private categoryService: CategoryService, 
-    private pointOfInteresetService: PointsOfInterestService) {
+    private pointOfInterestService: PointsOfInterestService) {
       this.mapService.newPointAnnounced.subscribe(coords => {
         this.shouldShow = true;
         this.newPoint(coords[0], coords[1]);
@@ -35,10 +35,13 @@ export class PointCreateFormComponent implements OnInit {
       this.categoryService.newCategoryProposalAnnounced.subscribe( _ => {
         this.shouldShow = false;
       });
-      this.categoryService.showProposalsAnnounced.subscribe(_ => {
+      this.categoryService.showProposalsAnnounced.subscribe( _ => {
         this.shouldShow = false;
       });
-      this.categoryService.categoryEditionAnnounced.subscribe(category => {
+      this.categoryService.categoryEditionAnnounced.subscribe( _ => {
+        this.shouldShow = false;
+      });
+      this.pointOfInterestService.pointEditedAnnouncement.subscribe( _ => {
         this.shouldShow = false;
       });
     }
@@ -85,7 +88,12 @@ export class PointCreateFormComponent implements OnInit {
         }
       }
     );
-    this.pointOfInteresetService.save(this.newPointCoords[0], this.newPointCoords[1], payload.name, payload.description, categories, payload.image_url);
+    this.pointOfInterestService
+    .save(this.newPointCoords[0], this.newPointCoords[1], 
+      payload.name, 
+      payload.description, 
+      categories, 
+      payload.image_url);
     this.shouldShow = false;
   }
 

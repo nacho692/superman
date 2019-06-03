@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PointOfInterest } from 'src/app/domain/point-of-interest';
 import { SearchService } from 'src/app/services/search.service';
 import { MapService } from 'src/app/services/map.service';
+import { PointsOfInterestService } from 'src/app/services/points-of-interest.service';
 
 @Component({
   selector: 'app-results',
@@ -12,7 +13,10 @@ export class ResultsComponent implements OnInit {
   points: PointOfInterest[];
   selectedPoint: PointOfInterest;
 
-  constructor(private searchService: SearchService, private mapService: MapService) { 
+  constructor(private searchService: SearchService, 
+    private mapService: MapService,
+    private pointOfInterestService: PointsOfInterestService) {
+
     this.searchService.newPointsAnnounced.subscribe(pois => {
       this.points = pois;
     });
@@ -30,5 +34,9 @@ export class ResultsComponent implements OnInit {
   resultSelected(point: PointOfInterest) {
     this.selectedPoint = point;
     this.mapService.announcePointSelected(point);
+  }
+
+  onEdit(point: PointOfInterest) {
+    this.pointOfInterestService.announceEdit(point);
   }
 }

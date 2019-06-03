@@ -29,6 +29,6 @@ export class AuthenticationService {
 
   getCaller(): string{
     let user = JSON.parse(localStorage.getItem("currentUser"));
-    return user? user.role: null;
+    return user? user.role: "user";
   }
 }

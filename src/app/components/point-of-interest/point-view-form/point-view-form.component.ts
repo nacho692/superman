@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MapService } from 'src/app/services/map.service';
 import { PointOfInterest } from 'src/app/domain/point-of-interest';
 import { CategoryService } from 'src/app/services/categories.service';
+import { PointsOfInterestService } from 'src/app/services/points-of-interest.service';
 
 @Component({
   selector: 'app-point-view-form',
@@ -14,7 +15,8 @@ export class PointViewFormComponent implements OnInit {
   point: PointOfInterest;
 
   constructor(private mapService: MapService,
-              private categoryService: CategoryService) { 
+              private categoryService: CategoryService,
+              private pointOfInterestService: PointsOfInterestService) { 
       this.mapService.pointSelectedAnnounced.subscribe(point => {
         this.shouldShow = true;
         this.point = point;
@@ -32,6 +34,9 @@ export class PointViewFormComponent implements OnInit {
         this.shouldShow = false;
       });
       this.categoryService.categoryEditionAnnounced.subscribe(category => {
+        this.shouldShow = false;
+      });
+      this.pointOfInterestService.pointEditedAnnouncement.subscribe( _ => {
         this.shouldShow = false;
       });
   }

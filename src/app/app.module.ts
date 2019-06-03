@@ -16,7 +16,7 @@ import { PointCreateFormComponent } from './components/point-of-interest/point-c
 import { PointViewFormComponent } from './components/point-of-interest/point-view-form/point-view-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { HasRoleDirective } from './directives/has-role.directive';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
 import { CategoryProposalFormComponent } from './components/categories/category-proposal-form/category-proposal-form.component';
@@ -24,6 +24,7 @@ import { ShowProposalsButtonComponent } from './components/categories/show-propo
 import { ProposedCategoriesFormComponent } from './components/categories/proposed-categories-form/proposed-categories-form.component';
 import { CategoryProposalButtonComponent } from './components/categories/category-proposal-button/category-proposal-button.component';
 import { CategoryProposalEditFormComponent } from './components/categories/category-edit-form/category-edit-form.component';
+import { PointEditFormComponent } from './components/point-of-interest/point-edit-form/point-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { CategoryProposalEditFormComponent } from './components/categories/categ
     ShowProposalsButtonComponent,
     ProposedCategoriesFormComponent,
     CategoryProposalEditFormComponent,
+    PointEditFormComponent,
     HasRoleDirective
   ],
   imports: [

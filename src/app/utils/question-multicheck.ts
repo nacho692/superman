@@ -1,11 +1,9 @@
 import { QuestionBase } from './question-base';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { Options } from 'selenium-webdriver/edge';
-import { groupBy } from 'rxjs/internal/operators/groupBy';
+import { FormControl, FormGroup } from '@angular/forms';
 
 export class MulticheckQuestion extends QuestionBase<Map<string, boolean>, FormGroup> {
   controlType = 'multicheck';
-  options: {key: string, name: string}[] = [];
+  options: {key: string, name: string, value: boolean}[] = [];
 
   constructor(options: {} = {}) {
     super(options);
@@ -14,7 +12,8 @@ export class MulticheckQuestion extends QuestionBase<Map<string, boolean>, FormG
 
   getForm(): FormGroup {
     let group = {};
-    this.options.forEach(check => group[check.key] = new FormControl(false));
+    this.options.forEach(check => group[check.key] = 
+      new FormControl(check.value? check.value : false));
     return new FormGroup(group);
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/services/categories.service';
 import { Category } from 'src/app/domain/category';
 import { MapService } from 'src/app/services/map.service';
+import { PointsOfInterestService } from 'src/app/services/points-of-interest.service';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class ProposedCategoriesFormComponent implements OnInit {
   shouldShow = false;
 
   constructor(private mapService: MapService,
-    private categoryService: CategoryService) { 
+    private categoryService: CategoryService,
+    private pointOfInterestService: PointsOfInterestService) { 
     this.categoryService.showProposalsAnnounced.subscribe(_ => {
       this.shouldShow = true;
       this.getProposedCategories();
@@ -30,6 +32,9 @@ export class ProposedCategoriesFormComponent implements OnInit {
       this.shouldShow = false;
     });
     this.categoryService.categoryEditionAnnounced.subscribe(category => {
+      this.shouldShow = false;
+    });
+    this.pointOfInterestService.pointEditedAnnouncement.subscribe( point => {
       this.shouldShow = false;
     });
   };

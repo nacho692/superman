@@ -1,9 +1,9 @@
-import { Injectable, ɵEMPTY_ARRAY } from '@angular/core';
-import { Category } from '../domain/category';
+import { Injectable } from '@angular/core';
 import { PointOfInterest } from '../domain/point-of-interest';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { backend_url } from '../config/backend_url'
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { SearchService } from './search.service';
 
 
 
@@ -12,16 +12,30 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class PointsOfInterestService {
 
-  constructor(private http: HttpClient) {}
+  private editedPoint = new Subject<PointOfInterest>();
 
-  search(query: string, categories: number[]): Observable<PointOfInterest[]> {
-    return this.http.post<PointOfInterest[]>(backend_url + '/points_of_interest/search', {query: query, categories: categories});
-  }
+  pointEditedAnnouncement = this.editedPoint.asObservable();
 
-  save(lat: number, lng: number, name: string, description: string, categories: number[], image_url: string) {
-    let poi = {name: name, description: description, lat: lat, lng: lng, categories: categories, image_url: image_url};
-    this.http.post<any>(backend_url + '/points_of_interest', poi).subscribe(res => {
+  constructor(private http: HttpClient, private searchService: SearchService) {}
+
+
+
+  save(lat: number, lng: number, name: string, description: string, categories: number[], imageUrl: string) {
+    let payload = {name: name, description: description, lat: lat, lng: lng, categories: categories, image_url: imageUrl};
+    this.http.post<any>(backend_url + '/points_of_interest', payload).subscribe(res => {
       console.log(res);
     });
+  }
+
+  edit(id: number, name: string, description: string, categories: number[], imageUrl: string, shouldShow) {
+    let payload = { name: name, description: description, categories: categories, image_url: imageUrl, should_show: shouldShow };
+    this.http.put(backend_url + '/points_of_interest/' + id, payload, {responseType: 'json'}).subscribe(res => {
+      console.log(res);
+      this.searchService.emitSearch();
+    });
+  }
+
+  announceEdit(point: PointOfInterest) {
+    this.editedPoint.next(point);
   }
 }
