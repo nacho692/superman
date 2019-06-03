@@ -1,18 +1,23 @@
 <div [formGroup]="form">
     <label [attr.for]="question.key">{{question.label}}</label>
 
-    <div [ngSwitch]="question.controlType">
+    <div class="container">
+        <div class="row" [ngSwitch]="question.controlType">
+            <div class="column">
+                <input *ngSwitchCase="'textbox'" [formControlName]="question.key" [id]="question.name" [type]="question.type">
 
-        <input *ngSwitchCase="'textbox'" [formControlName]="question.key" [id]="question.name" [type]="question.type">
+                <input *ngSwitchCase="'checkbox'" [formControlName]="question.key" [id]="question.name" type="checkbox">
 
-        <input *ngSwitchCase="'checkbox'" [formControlName]="question.key" [id]="question.name" type="checkbox">
+                <div *ngSwitchCase="'multicheck'">
+                    <div *ngFor="let opt of question.options; let i=index" class="float-left p-3" [formGroupName]="question.key">
+                        <input type="checkbox" [formControlName]="opt.key" /> {{opt.name}}
+                    </div>
+                </div>
+            </div>
+            <div class="column">
 
-        <div *ngSwitchCase="'multicheck'">
-            <div *ngFor="let opt of question.options; let i=index" [formGroupName]="question.key">
-                <input type="checkbox" [formControlName]="opt.key" /> {{opt.name}}
+                <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div>
             </div>
         </div>
     </div>
-
-    <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div>
 </div>

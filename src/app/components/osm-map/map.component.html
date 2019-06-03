@@ -1,0 +1,38 @@
+<aol-map (onClick)="mapOnClick($event)">
+    <aol-interaction-default></aol-interaction-default>
+
+    <aol-view [zoom]="14">
+        <aol-coordinate [x]="lng " [y]="lat " [srid]=" 'EPSG:4326' "></aol-coordinate>
+    </aol-view>
+    <aol-layer-tile>
+        <aol-source-osm></aol-source-osm>
+    </aol-layer-tile>
+    <aol-layer-vector>
+        <aol-source-vector>
+            <aol-feature *ngFor="let point of points">
+                <aol-geometry-point>
+                    <aol-coordinate [x]="point.longitude " [y]="point.latitude " [srid]=" 'EPSG:4326' "></aol-coordinate>
+                </aol-geometry-point>
+                <aol-style>
+                    <aol-style-circle [radius]="6">
+                        <aol-style-stroke [color]=" 'black' " [width]="width "></aol-style-stroke>
+                        <aol-style-fill [color]=" 'green' "></aol-style-fill>
+                    </aol-style-circle>
+                    <aol-style-text [text]="point.name.length> 15? point.name.substr(0,15) + '...': point.name" [offsetY]="-15" [scale]="1.5">
+                    </aol-style-text>
+                </aol-style>
+            </aol-feature>
+            <aol-feature *ngIf="newPoint">
+                <aol-geometry-point>
+                    <aol-coordinate [x]="newPoint[1]" [y]="newPoint[0]" [srid]="'EPSG:4326'"></aol-coordinate>
+                </aol-geometry-point>
+                <aol-style>
+                    <aol-style-circle [radius]="6">
+                        <aol-style-stroke [color]="'black'" [width]="width"></aol-style-stroke>
+                        <aol-style-fill [color]="'red'"></aol-style-fill>
+                    </aol-style-circle>
+                </aol-style>
+            </aol-feature>
+        </aol-source-vector>
+    </aol-layer-vector>
+</aol-map>

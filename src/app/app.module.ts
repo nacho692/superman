@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FiltersComponent } from './components/filters/filters.component';
-import { MapComponent } from './components/map/map.component';
+import { MapComponent } from './components/osm-map/map.component';
 import { AgmCoreModule }        from '@agm/core';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { ContentComponent } from './components/content/content.component';
@@ -25,6 +25,7 @@ import { ProposedCategoriesFormComponent } from './components/categories/propose
 import { CategoryProposalButtonComponent } from './components/categories/category-proposal-button/category-proposal-button.component';
 import { CategoryProposalEditFormComponent } from './components/categories/category-edit-form/category-edit-form.component';
 import { PointEditFormComponent } from './components/point-of-interest/point-edit-form/point-edit-form.component';
+import { AngularOpenlayersModule, FeatureComponent } from "ngx-openlayers";
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { PointEditFormComponent } from './components/point-of-interest/point-edi
     NgbModule,
     HttpClientModule,
     Angular2FontawesomeModule,
+    AngularOpenlayersModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDP827zHnIce50b1GTB8QPrHOUBFwcsGyw'
     })
