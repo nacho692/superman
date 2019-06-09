@@ -152,7 +152,7 @@ app.post('/points_of_interest', function(req, res) {
     console.log("Creating POI")
     console.log(req.body);
     let poi = req.body;
-    POIS.push({
+    let newPoi = {
         id: POIS.length + 1,
         name: poi.name,
         description: poi.description,
@@ -161,8 +161,9 @@ app.post('/points_of_interest', function(req, res) {
         categories: poi.categories.map(cat_id => CATEGORIES.find(c => c.id === cat_id)),
         image_url: poi.image_url,
         should_show: true
-    });
-    res.sendStatus(200);
+    }
+    POIS.push(newPoi);
+    res.json(newPoi);
 });
 
 app.put('/points_of_interest/:id', function(req, res) {

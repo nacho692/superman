@@ -25,7 +25,7 @@ import { ProposedCategoriesFormComponent } from './components/categories/propose
 import { CategoryProposalButtonComponent } from './components/categories/category-proposal-button/category-proposal-button.component';
 import { CategoryProposalEditFormComponent } from './components/categories/category-edit-form/category-edit-form.component';
 import { PointEditFormComponent } from './components/point-of-interest/point-edit-form/point-edit-form.component';
-import { AngularOpenlayersModule, FeatureComponent } from "ngx-openlayers";
+import { AngularOpenlayersModule } from "ngx-openlayers";
 
 @NgModule({
   declarations: [

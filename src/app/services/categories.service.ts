@@ -4,6 +4,7 @@ import { Observable, Subject, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { backend_url } from '../config/backend_url'
 import { AuthenticationService } from './authentication.service';
+import { RestService } from './rest.service';
 
 
 @Injectable({
@@ -21,17 +22,14 @@ export class CategoryService {
   modifiedCategoriesAnnounced = this.modifiedCategories.asObservable(); // For category acceptance/rejection
   categoryEditionAnnounced = this.categoryEdition.asObservable(); // For category edition purposes
   
-  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {}
+  constructor(private restClient: RestService) {}
 
   getProposedCategories() : Observable<Category[]> {
-    return this.http.get<Category[]>(backend_url + '/proposed_categories');
+    return this.restClient.get<Category[]>(backend_url + '/proposed_categories');
   }
 
   getCategories() : Observable<Category[]> {
-    var headers = new HttpHeaders({
-      "caller": this.authenticationService.getCaller(),
-    });
-    return this.http.get<Category[]>(backend_url + '/categories', { headers: headers });
+    return this.restClient.get<Category[]>(backend_url + '/categories');
   }
 
   announceNewCategoryProposal() {
@@ -47,25 +45,25 @@ export class CategoryService {
   }
 
   proposeCategory(name: string, description: string) {
-    this.http.post(backend_url + '/proposed_categories', {name, description}, {responseType: 'json'}).subscribe(res => {
+    this.restClient.post(backend_url + '/proposed_categories', {name, description}).subscribe(res => {
     });
   }
 
   editCategory(id: number, name: string, description: string, shouldShow: boolean) {
-    this.http.put(backend_url + '/categories/' + id, {name: name, description: description, should_show: shouldShow}, 
-    {responseType: 'json'}).subscribe(res => {
+    this.restClient.put(backend_url + '/categories/' + id, {name: name, description: description, should_show: shouldShow})
+    .subscribe(res => {
       this.modifiedCategories.next();
     });
   }
 
   save(category: Category) {
-    this.http.post(backend_url + '/categories', category).subscribe(res => {
+    this.restClient.post(backend_url + '/categories', category).subscribe(res => {
       this.modifiedCategories.next();
     });
   }
 
   removeCategoryProposal(category: Category) {
-    this.http.delete(backend_url + '/proposed_categories/' + category.id, {responseType: 'text'}).subscribe(res => {
+    this.restClient.delete(backend_url + '/proposed_categories/' + category.id).subscribe(res => {
     });
   }
 }

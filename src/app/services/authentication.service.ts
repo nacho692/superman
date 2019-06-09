@@ -27,8 +27,13 @@ export class AuthenticationService {
     return (user != null && user.role == "admin")  
   }
 
-  getCaller(): string{
+  getCaller(): string {
     let user = JSON.parse(localStorage.getItem("currentUser"));
     return user? user.role: "user";
+  }
+
+  getToken(): string {
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+    return "tokensin";
   }
 }

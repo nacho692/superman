@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { PointOfInterest } from '../domain/point-of-interest';
 import { Category } from '../domain/category';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { backend_url } from '../config/backend_url';
-import { AuthenticationService } from './authentication.service';
+import { RestService } from './rest.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,7 @@ export class SearchService {
   
   newPointsAnnounced = this.newPointsOfInterests.asObservable();
 
-  constructor(private http: HttpClient, private authenticationService: AuthenticationService) { }
+  constructor(private restClient: RestService) { }
 
   announceNewQuery(searchQuery: string) {
     this.searchQuery = searchQuery;
@@ -38,10 +37,7 @@ export class SearchService {
   }
 
   private search(query: string, categories: number[]): Observable<PointOfInterest[]> {
-    var headers = new HttpHeaders({
-      "caller": this.authenticationService.getCaller(),
-    });
-    return this.http.post<PointOfInterest[]>(backend_url + '/points_of_interest/search', 
-    {query: query, categories: categories}, { headers: headers });
+    return this.restClient.post<PointOfInterest[]>(backend_url + '/points_of_interest/search', 
+    {query: query, categories: categories});
   }
 }
