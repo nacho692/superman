@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { JsonPipe } from '@angular/common';
-import { of, Observable } from 'rxjs';
+import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
 
 
 @Injectable({
@@ -8,23 +7,37 @@ import { of, Observable } from 'rxjs';
 })
 export class AuthenticationService {
 
-  constructor() {}
+  constructor(private authService: AuthService) {
+    this.authService.authState.subscribe((user) => {
+      console.log(user)
+      if (user !== null) {
+        this.login(user.id, user.idToken);
+      } else {
+        this.logout();
+      }
+    });
+  }
 
-  login(username: string, password: string): Observable<boolean> {
-    if (username == "admin" && password == "admin") {
-      localStorage.setItem('currentUser', JSON.stringify({user: "admin", token: "xxx", role: "admin"}));
-      return of(true);
-    }
-    return of(false);
+  ngOnInit() {
+    
+  }
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  private login(id: string, token: string) {
+    localStorage.setItem('currentUser', JSON.stringify({id: id, token: token, role: "admin"}));
   }
 
   logout() {
     localStorage.removeItem("currentUser");
+    this.authService.signOut();
   }
 
   isAdmin(): boolean {
     let user = JSON.parse(localStorage.getItem("currentUser"));
-    return (user != null && user.role == "admin")  
+    return (user != null && user.role == "admin")
   }
 
   getCaller(): string {
@@ -34,6 +47,6 @@ export class AuthenticationService {
 
   getToken(): string {
     let user = JSON.parse(localStorage.getItem("currentUser"));
-    return "tokensin";
+    return user? user.token: "";
   }
 }

@@ -26,6 +26,8 @@ import { CategoryProposalButtonComponent } from './components/categories/categor
 import { CategoryProposalEditFormComponent } from './components/categories/category-edit-form/category-edit-form.component';
 import { PointEditFormComponent } from './components/point-of-interest/point-edit-form/point-edit-form.component';
 import { AngularOpenlayersModule } from "ngx-openlayers";
+import { provideConfig } from 'socialloginConfig';
+import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -58,11 +60,17 @@ import { AngularOpenlayersModule } from "ngx-openlayers";
     HttpClientModule,
     Angular2FontawesomeModule,
     AngularOpenlayersModule,
+    SocialLoginModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDP827zHnIce50b1GTB8QPrHOUBFwcsGyw'
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require("body-parser");
 var cors = require('cors');
+const {OAuth2Client} = require('google-auth-library');
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -71,6 +72,15 @@ POIS = [{
 PROPOSED_CATEGORIES = [{ "id": 0, "name": "Lugares Oscuros", "description": "Donde no se ve nada y la magia está en el aire" },
     { "id": 1, "name": "Cat Propuesta", "description": "Una categoria propuesta nueva" }
 ];
+
+app.all('/*', function(req, res) {
+    if (req.header("caller") == "admin") {
+        verify(req.header("token"));
+    } else {
+        res.status(404);
+    }
+    req.next();
+});
 
 app.get('/categories', function(req, res) {
     let isAdminCalling = req.header("caller") == "admin";
@@ -214,6 +224,19 @@ app.post('/points_of_interest/search', function(req, res) {
     });
     res.json(found_pois);
 });
+
+
+const CLIENT_ID = "68076431524-jm2vr8hf2t6t1g7k3ef84kt309l37gbm.apps.googleusercontent.com";
+const googleClient = new OAuth2Client(CLIENT_ID);
+function verify(token) {
+  return googleClient.verifyIdToken({
+      idToken: token,
+      audience: CLIENT_ID,
+  }).then(res => {
+      return res.payload.sub == "118218727106131839536";
+  }
+  ).catch(_ => false);  
+}
 
 
 app.listen(3000, function() {
