@@ -74,10 +74,17 @@ PROPOSED_CATEGORIES = [{ "id": 0, "name": "Lugares Oscuros", "description": "Don
 ];
 
 app.all('/*', function(req, res) {
+    console.log("caller: ", req.header("caller"));
     if (req.header("caller") == "admin") {
-        verify(req.header("token"));
-    } else {
-        res.status(404);
+        verify(req.header("token")).then( (isVerified) => {
+            if (!isVerified) {
+                res.sendStatus(404);
+                req.next("Tough luck buddy");
+            } else {
+                req.next();
+            }
+        });
+        return;
     }
     req.next();
 });
@@ -228,14 +235,14 @@ app.post('/points_of_interest/search', function(req, res) {
 
 const CLIENT_ID = "68076431524-jm2vr8hf2t6t1g7k3ef84kt309l37gbm.apps.googleusercontent.com";
 const googleClient = new OAuth2Client(CLIENT_ID);
+
 function verify(token) {
   return googleClient.verifyIdToken({
       idToken: token,
       audience: CLIENT_ID,
   }).then(res => {
-      return res.payload.sub == "118218727106131839536";
-  }
-  ).catch(_ => false);  
+      return ["118218727106131839536", "111616880338884996353"].includes(res.payload.sub);
+  }).catch(_ => false);
 }
 
 
